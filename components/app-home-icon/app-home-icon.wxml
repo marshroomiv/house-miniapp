@@ -1,0 +1,6 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-home-icon" bindtap="appHomeTap">
+    <image src="../../image/home2.png"></image>
+    <text>首页</text>
+</view>

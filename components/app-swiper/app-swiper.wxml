@@ -1,0 +1,18 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view wx:if="{{value != null && value.imgUrls!=null}}">
+    <video wx:if="{{showVideo}}" autoplay="true" src="{{tools.FILE_URL + video.video}}" poster="{{tools.FILE_URL + video.img}}" style="width: 750rpx; {{height!=null?'height:'+ height + 'rpx;':''}}" controls bindplay="onPlay" bindended="onEnded" bindpause="onPause" bindtouchmove="onTouchMove"></video>
+    <swiper wx:else indicator-dots="{{value.indicatorDots}}" autoplay="{{value.autoplay}}" interval="{{value.interval}}" duration="{{value.duration}}" style="{{height!=null?'height:'+ height + 'rpx;':''}}">
+        <block wx:for="{{value.imgUrls}}" wx:key="img">
+            <swiper-item  >
+                  <image  wx:if="{{item.video==null}}" class="app-swipe-image" src="{{tools.getPicUrl(item.img,value.thumbnailSuffix)}}" data-url="{{item.url}}" style="width: 750rpx; {{height!=null?'height:'+ height + 'rpx;':''}}" bindtap="onSwiperItemTap" bindload="onImageLoad" />
+                  <view wx:else style="position:relative;" style="width: 750rpx; {{height!=null?'height:'+ height + 'rpx;':''}}" data-index="{{index}}" bindtap="onVideoItemTap">
+                      <image  class="app-swipe-image" src="{{tools.getPicUrl(item.img,null)}}" style="width:100%;height:100%;" />
+                      <view class="app-swiper-play">
+                          <image src="../../image/play.png"></image>
+                      </view>
+                  </view>
+             </swiper-item>
+        </block>
+    </swiper>
+</view>

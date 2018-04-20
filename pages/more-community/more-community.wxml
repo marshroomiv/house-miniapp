@@ -1,0 +1,7 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-more-community">
+
+    <app-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjects} }}"></app-house-list>
+
+</view>

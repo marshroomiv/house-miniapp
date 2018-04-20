@@ -1,0 +1,17 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-drop-down-a" style="height: {{height}}px;">
+    <view class="app-drop-down-a-left" >
+        <view class="app-drop-down-a-left-item {{ value.domainDistrict==null?'app-drop-down-a-left-item-active':''}}" data-index="-1" bindtap="onDistrictClick">不限</view>
+        <block wx:for="{{ domainDistricts }}" wx:key="districtCode">
+            <view class="app-drop-down-a-left-item {{ value.domainDistrict.districtName==item.districtName?'app-drop-down-a-left-item-active':''}}" data-index="{{index}}" bindtap="onDistrictClick">{{ item.districtName }}</view>
+        </block>
+    </view>
+
+    <view class="app-drop-down-a-right" style="max-height: {{maxHeight}}px;">
+        <view class="app-drop-down-a-right-item {{ value.block==null?'app-drop-down-a-right-item-active':''}}" data-index="-1" bindtap="onBlockClick">不限</view>
+        <block wx:for="{{ filterBlocks }}" wx:key="blockUid">
+            <view class="app-drop-down-a-right-item {{ value.block.blockUid==item.blockUid?'app-drop-down-a-right-item-active':''}}" data-index="{{index}}" bindtap="onBlockClick">{{ item.blockName }}</view>
+        </block>
+    </view>
+</view>

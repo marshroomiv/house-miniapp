@@ -1,0 +1,3 @@
+<template name="appPicScroll">
+    <app-pic-scroll value="{{value}}"></app-pic-scroll>
+</template>

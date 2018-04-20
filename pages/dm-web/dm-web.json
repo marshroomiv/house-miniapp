@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "数据管理",
+  "usingComponents": {
+    "app-contact-icon": "../../components/app-contact-icon/app-contact-icon"
+  }
+}

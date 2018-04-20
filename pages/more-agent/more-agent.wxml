@@ -1,0 +1,16 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<app-focus-agent value="{{ {agent: agent, agentHouse: true} }}"></app-focus-agent>
+
+<app-tab value="{{ appTab_0 }}" bindcomponentevent="onComponentEvent"></app-tab>
+
+<view class="page-more-agent weui-tab__panel">
+
+    <block wx:if="{{activeIndex==0}}">
+        <app-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjects} }}"></app-house-list>
+    </block>
+    <block wx:else>
+        <app-rent-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjects} }}"></app-rent-house-list>
+    </block>
+
+</view>

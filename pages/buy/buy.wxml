@@ -1,0 +1,25 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-buy-header">
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="输入小区名" value="{{searchVal}}" bindinput="onSearchInput" />
+                <view class="weui-icon-clear" wx:if="{{searchVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{searchVal==null || searchVal.length==0}}" bindtap="onSearch">搜索</view>
+    </view>
+
+    <app-menu-a bindcomponentevent="onMenuEvent"></app-menu-a>
+</view>
+
+
+<view class="page-buy">
+
+    <app-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjects} }}"></app-house-list>
+
+</view>

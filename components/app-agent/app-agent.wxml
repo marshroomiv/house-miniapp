@@ -1,0 +1,28 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-agent" wx:if="{{value.agent!=null && value.agent.phone!=null}}" bindtap="onMoreAgent">
+    <view class="app-agent-avatar">
+        <image wx:if="{{value.agent.headImageUrl!=null}}" src="{{value.agent.headImageUrl}}"></image>
+        <image wx:else src="../../image/aru.png"></image>
+    </view>
+
+    <view class="app-agent-info">
+        <view class="app-agent-info-name">{{value.agent.nickName==null?'未知':value.agent.nickName}}</view>
+        <view class="app-agent-info-phone">{{value.agent.phone}}</view>
+    </view>
+
+    <view class="app-agent-action" style="right:10px;" catchtap="onFocus">
+        <view class="app-agent-action-icon">
+            <image src="../../image/agent_follow.png"></image>
+        </view>
+        <view class="app-agent-action-txt">关注</view>
+    </view>
+
+    <view class="app-agent-action" style="right:60px;" catchtap="onCall">
+        <view class="app-agent-action-icon">
+            <image src="../../image/call.png"></image>
+        </view>
+        <view class="app-agent-action-txt">呼叫</view>
+    </view>
+
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的关注",
+  "usingComponents": {
+    "app-focus-agent": "../../components/app-focus-agent/app-focus-agent"
+  }
+}

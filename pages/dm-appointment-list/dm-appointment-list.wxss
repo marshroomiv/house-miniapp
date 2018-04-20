@@ -1,0 +1,1 @@
+@import "../appointment-list/appointment-list.wxss";.page-appointment-list-close{position:absolute;right:10px;top:10px;width:20px;height:20px;z-index:1000}.page-appointment-list-item-btns{height:44px;text-align:center;background:#fff}.page-appointment-list-item-btns button{margin:10px}

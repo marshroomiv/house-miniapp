@@ -1,0 +1,1 @@
+@import "../../wxParse/wxParse.wxss";.page-index-search{position:absolute;right:10px;top:0;font-size:14px;height:28px;line-height:28px;color:gray}.page-bottom-info{margin:50px auto}.page-bottom-info .page-bottom-info-txt{display:block;width:100%;font-size:12px;color:#999;text-align:center}.page-index-more{display:-webkit-box;display:-webkit-flex;display:flex;padding-top:20px}

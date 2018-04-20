@@ -1,0 +1,10 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-drop-down-b" style="height: {{height}}px;">
+    <view class="app-drop-down-b-wrapper">
+        <view class="app-drop-down-b-item {{value.selected==null?'app-drop-down-b-item-active':''}}" data-index="-1" bindtap="onChange">不限</view>
+        <block wx:for="{{ value.list }}" wx:key="*this">
+            <view class="app-drop-down-b-item {{value.selected==item?'app-drop-down-b-item-active':''}}" data-index="{{index}}" bindtap="onChange"> {{item}}</view>
+        </block>
+    </view>
+</view>

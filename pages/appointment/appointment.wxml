@@ -1,0 +1,113 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-appointment">
+
+    <view class="weui-panel weui-panel_access" wx:if="{{houseCoverPicturePath!=null}}" style="margin-bottom:-1px;">
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_appmsg">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                    <image class="weui-media-box__thumb" src="{{ tools.getPicUrl(houseCoverPicturePath,'_200_0') }}" lazy-load="true" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title">{{ houseTitle }}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">昵称</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" value="{{name}}" bindinput="onNameInput"/>
+            </view>
+            <button size="mini"  plain="true" bindtap="getName" wx:if="{{name == null}}" type="primary" >获取</button>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" value="{{phone}}" bindinput="onPhoneInput"/>
+            </view>
+            <button size="mini" plain="true" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{phone == null}}" type="primary" >获取</button>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">日期</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker mode="date" value="{{date}}" start="{{minDate}}" end="{{maxDate}}" bindchange="onDateChange">
+                    <view class="weui-input">{{date}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">时间</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker mode="time" value="{{time}}" start="08:00" end="20:00" bindchange="onTimeChange">
+                    <view class="weui-input">{{time}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">需求</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker bindchange="onRequirementChange" value="{{requirementIndex}}" range="{{requirements}}" disabled="{{houseUid!=null}}">
+                    <view class="weui-input {{houseUid!=null?'page-appointment-grey':''}}">{{requirements[requirementIndex]}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" wx:if="{{agentName !=null}}">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">经纪人姓名</view>
+            </view>
+            <view class="weui-cell__bd">
+                <view class="weui-input page-appointment-grey" >{{agentName}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" wx:if="{{agentPhone !=null}}">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">经纪人手机</view>
+            </view>
+            <view class="weui-cell__bd">
+                <view class="weui-input page-appointment-grey">{{agentPhone}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">留言</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" disabled/>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="page-appointment-textarea">
+            <textarea placeholder="请输入小区、户型、大小、价格、位置等信息" bindinput="onCommentInput"/>
+        </view>
+    </view>
+
+    <button  disabled="{{disabled || name==null || phone==null}}"  class="page-appointment-btn" bindtap="onSubmit" type="primary">提交</button>
+
+</view>

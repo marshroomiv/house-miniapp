@@ -1,0 +1,1 @@
+@import "../app-house-list/app-house-list.wxss";.app-favourite-house-list-del{width:24px;height:24px;position:absolute;bottom:10px;right:10px}

@@ -1,0 +1,15 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell" wx:for="{{msgsByUserArr}}" wx:key="userUid" bindtap="onTap" data-userUid="{{item.userUid}}">
+        <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+            <image src="{{item.headImageUrl==null?'../../image/head.png':item.headImageUrl}}" style="width: 50px; height: 50px; display: block" lazy-load="true" />
+            <view wx:if="{{item.newMsgCount>0}}" class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">{{item.newMsgCount}}</view>
+        </view>
+        <view class="weui-cell__bd">
+            <view>{{item.nickName==null?"保密":item.nickName}}</view>
+            <view class="page-dm-chat-msg">{{item.content}}</view>
+            <view class="page-dm-time">{{tools.getCnDateTime(item.createTimestamp)}}</view>
+        </view>
+    </view>
+</view>

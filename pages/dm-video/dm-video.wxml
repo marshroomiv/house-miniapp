@@ -1,0 +1,41 @@
+<view class="page-dm-video">
+
+    <view class="page-body-info">
+        <block wx:if="{{video == null}}">
+            <view class="image-plus image-plus-nb" bindtap="chooseVideo">
+                <view class="image-plus-horizontal"></view>
+                <view class="image-plus-vertical"></view>
+            </view>
+            <view class="image-plus-text">添加视频</view>
+        </block>
+        <block wx:if="{{video != null}}">
+            <video src="{{video.tempFilePath}}" class="video" style="width:750rpx;height:422rpx;"></video>
+        </block>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input" style="height:44px;">
+            <view class="weui-cell__hd">
+                <view class="weui-label">压缩/原始</view>
+            </view>
+            <view class="weui-cell__bd">
+                <switch bindchange="switchChange" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input {{name==''?'weui-cell_warn':''}}">
+            <view class="weui-cell__hd">
+                <view class="weui-label">素材名称</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="请输入素材名称" bindinput="onNameInput"/>
+            </view>
+            <view class="weui-cell__ft" wx:if="{{name==''}}">
+                <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">视频最大限制{{limit}}MB</view>
+
+    <button  disabled="{{disabled || video==null}}" class="page-dm-video-btn" type="primary" bindtap="onUpload">上传</button>
+
+</view>

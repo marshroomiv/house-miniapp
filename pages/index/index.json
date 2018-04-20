@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "app-swiper": "../../components/app-swiper/app-swiper",
+    "app-quick-icon": "../../components/app-quick-icon/app-quick-icon",
+    "app-news": "../../components/app-news/app-news",
+    "app-contact-icon": "../../components/app-contact-icon/app-contact-icon",
+    "app-house-list": "../../components/app-house-list/app-house-list"
+  }
+}

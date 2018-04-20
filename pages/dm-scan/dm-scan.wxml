@@ -1,0 +1,15 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="dm-scan">
+
+    <view wx:if="{{type == 'Login'}}">
+        <view class="dm-scan-content">确认登录系统后台?</view>
+
+        <view class="dm-scan-btns">
+            <button type="primary" bindtap="onBack">返回</button>
+            <button type="warn" bindtap="onLogin" disabled="{{disabled}}">确认</button>
+        </view>
+
+    </view>
+
+</view>

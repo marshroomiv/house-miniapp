@@ -1,0 +1,42 @@
+<view class="page-dm-image">
+    <view class="weui-cells">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                    <view class="weui-uploader__hd">
+                        <view class="weui-uploader__title">点击可预览</view>
+                        <view class="weui-uploader__info">{{imageList.length}}/9</view>
+                    </view>
+                    <view class="weui-uploader__bd">
+                        <view class="weui-uploader__files">
+                            <block wx:for="{{imageList}}" wx:key="*this">
+                                <view class="weui-uploader__file">
+                                    <image class="weui-uploader__img" src="{{item}}" data-src="{{item}}" bindtap="previewImage"></image>
+                                </view>
+                            </block>
+                        </view>
+                        <view class="weui-uploader__input-box">
+                            <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input {{name==''?'weui-cell_warn':''}}">
+            <view class="weui-cell__hd">
+                <view class="weui-label">素材名称</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="请输入素材名称" bindinput="onNameInput"/>
+            </view>
+            <view class="weui-cell__ft" wx:if="{{name==''}}">
+                <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-cells__title">图片最大限制1MB</view>
+
+    <button  disabled="{{disabled || imageList==null || imageList.length==0}}" class="page-dm-image-btn" type="primary" bindtap="onUpload">上传</button>
+</view>

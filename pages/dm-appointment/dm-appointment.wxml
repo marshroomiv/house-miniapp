@@ -1,0 +1,109 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-appointment">
+
+    <view class="weui-panel weui-panel_access" wx:if="{{appointment.houseCoverPicturePath!=null}}" style="margin-bottom:-1px;">
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_appmsg">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                    <image class="weui-media-box__thumb" src="{{ tools.getPicUrl(appointment.houseCoverPicturePath,'_200_0') }}" lazy-load="true" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title">{{ appointment.houseTitle }}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">昵称</view>
+            </view>
+            <view class="weui-cell__bd">
+                <view class="weui-input page-appointment-grey">{{appointment.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机</view>
+            </view>
+            <view class="weui-cell__bd">
+                <view class="weui-input page-appointment-grey">{{appointment.phone}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">日期</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker mode="date" value="{{date}}" start="{{minDate}}" end="{{maxDate}}" bindchange="onDateChange">
+                    <view class="weui-input">{{date}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">时间</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker mode="time" value="{{time}}" start="08:00" end="20:00" bindchange="onTimeChange">
+                    <view class="weui-input">{{time}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">需求</view>
+            </view>
+            <view class="weui-cell__bd">
+                <view class="weui-input page-appointment-grey">{{tools.getLookup(dictionaries, appointment.requirementTypeCode)}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">经纪人姓名</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" value="{{appointment.agentName}}" bindinput="onAgentNameInput"/>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">经纪人手机</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" value="{{appointment.agentPhone}}" bindinput="onAgentPhoneInput"/>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">留言</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" disabled/>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="page-appointment-textarea page-appointment-grey">
+            <textarea value="{{appointment.comment}}" disabled/>
+        </view>
+    </view>
+
+    <button  disabled="{{disabled}}"  class="page-appointment-btn" bindtap="onSubmit" type="primary">提交</button>
+
+</view>

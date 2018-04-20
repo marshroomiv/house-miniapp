@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "租房",
+  "usingComponents": {
+    "app-rent-menu-a": "../../components/app-rent-menu-a/app-rent-menu-a",
+    "app-rent-house-list": "../../components/app-rent-house-list/app-rent-house-list"
+  }
+}

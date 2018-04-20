@@ -1,0 +1,7 @@
+<view class="app-features" wx:if="{{value.features!=null && value.features.length>0}}">
+    <block wx:for="{{value.features}}" wx:key="*this">
+        <view class="app-features-item" wx:if="{{index == 0}}" style="border: 1px solid rgb(1,201,129);color:rgb(1,201,129);">{{item}}</view>
+        <view class="app-features-item" wx:if="{{index == 1}}" style="border: 1px solid rgb(255,175,29);color:rgb(255,175,29);">{{item}}</view>
+        <view class="app-features-item" wx:if="{{index == 2}}" style="border: 1px solid rgb(59,186,250);color:rgb(59,186,250);">{{item}}</view>
+    </block>
+</view>

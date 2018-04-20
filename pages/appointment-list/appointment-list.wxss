@@ -1,0 +1,1 @@
+@import "../appointment/appointment.wxss";.page-appointment-list-item{position:relative}.page-appointment-list-closed{position:absolute;right:10px;top:40px;z-index:10000;opacity:.6;-webkit-transform:rotate(-9deg);transform:rotate(-9deg);width:92px;height:33px}.page-appointment-list-phone{position:absolute;right:10px;top:7px;width:30px;height:30px;z-index:2000}

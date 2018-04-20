@@ -1,0 +1,86 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<app-tab value="{{ appTab_0 }}" bindcomponentevent="onComponentEvent"></app-tab>
+
+<app-form-a wx:if="{{showFormA}}" value="{{ {userObject: selectedUserObject} }}" bindcomponentevent="onFormEvent"></app-form-a>
+
+<view class="page-dm-member">
+
+    <view class="weui-search-bar" wx:if="{{ activeIndex == 0 }}">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{searchVal}}" bindinput="onSearchInput" />
+                <view class="weui-icon-clear" wx:if="{{searchVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{searchVal==null || searchVal.length==0}}" bindtap="onSearch">搜索</view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title" wx:if="{{ activeIndex == 0 && userObjects!=null }}">
+        <view class="weui-cell" wx:for="{{userObjects}}" wx:key="userUid">
+            <view class="weui-cell__hd" style="position: relative;margin-right: 10px;" data-index="{{index}}" bindtap="onDetail">
+                <image src="{{item.headImageUrl==null?'../../image/head.png':item.headImageUrl}}" style="width: 50px; height: 50px; display: block" lazy-load="true" />
+            </view>
+            <view class="weui-cell__bd">
+                <view>{{item.nickName==null?"保密":item.nickName}}</view>
+                <view class="page-dm-member-btns">
+                    <label class="checkbox">
+                        <checkbox value="ban" checked="{{item.userStatusCode=='INACTIVE'}}" disabled="{{item.isAdmin}}" data-index="{{index}}" bindtap="onBan"/>禁止
+                    </label>
+                    <label class="checkbox">
+                        <checkbox value="admin" checked="{{item.isAdmin}}" disabled="{{item.userUid == user.userUid || item.userStatusCode=='INACTIVE'}}"data-index="{{index}}" bindtap="onAdmin"/>管理员
+                    </label>
+                    <label class="checkbox">
+                        <checkbox value="agent" checked="{{item.agentIndicator=='Y'}}" disabled="{{item.userStatusCode=='INACTIVE'}}"data-index="{{index}}" bindtap="onAgent"/>经纪人
+                    </label>
+                </view>
+                <view class="page-dm-member-time">{{tools.getOnlyDate(item.maintenanceTimestamp)}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" wx:if="{{ activeIndex == 1 && userObjects!=null }}">
+        <view class="weui-cell" wx:for="{{userObjects}}" wx:key="userUid" wx:if="{{!item.isDeleted}}">
+            <view class="weui-cell__hd" style="position: relative;margin-right: 10px;" data-index="{{index}}" bindtap="onDetail">
+                <image src="{{item.headImageUrl==null?'../../image/head.png':item.headImageUrl}}" style="width: 50px; height: 50px; display: block" lazy-load="true" />
+            </view>
+            <view class="weui-cell__bd">
+                <view>{{item.nickName==null?"保密":item.nickName}} {{item.phone==null?"":item.phone}}</view>
+                <view class="page-dm-member-btns" style="margin-top:5px;">
+                    <button style="{{(item.userUid!=user.userUid)?'color: #F44336;border: 1px solid #F44336;':''}}" plain="true" type="default" size="mini" disabled="{{item.userUid==user.userUid}}" data-index="{{index}}" bindtap="onCancelAdmin">取消</button>
+                </view>
+                <view class="page-dm-member-time">{{tools.getOnlyDate(item.maintenanceTimestamp)}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" wx:if="{{ activeIndex == 2 && userObjects!=null }}">
+        <view class="weui-cell" wx:for="{{userObjects}}" wx:key="userUid" wx:if="{{!item.isDeleted}}">
+            <view class="weui-cell__hd" style="position: relative;margin-right: 10px;" data-index="{{index}}" bindtap="onDetail">
+                <image src="{{item.headImageUrl==null?'../../image/head.png':item.headImageUrl}}" style="width: 50px; height: 50px; display: block" lazy-load="true" />
+            </view>
+            <view class="weui-cell__bd">
+                <view>{{item.nickName==null?"保密":item.nickName}} {{item.phone==null?"":item.phone}}</view>
+                <view class="page-dm-member-btns" style="margin-top:5px;">
+                    <button style="color: #F44336;border: 1px solid #F44336;" plain="true" type="default" size="mini" data-index="{{index}}" bindtap="onCancelAdmin">取消</button>
+                </view>
+                <view class="page-dm-member-time">{{tools.getOnlyDate(item.maintenanceTimestamp)}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" wx:if="{{ activeIndex == 3 && userObjects!=null }}">
+        <view class="weui-cell" wx:for="{{userObjects}}" wx:key="userUid" wx:if="{{item.userStatusCode=='INACTIVE'}}">
+            <view class="weui-cell__hd" style="position: relative;margin-right: 10px;" data-index="{{index}}" bindtap="onDetail">
+                <image src="{{item.headImageUrl==null?'../../image/head.png':item.headImageUrl}}" style="width: 50px; height: 50px; display: block" lazy-load="true" />
+            </view>
+            <view class="weui-cell__bd">
+                <view>{{item.nickName==null?"保密":item.nickName}}</view>
+                <view class="page-dm-member-btns" style="margin-top:5px;">
+                    <button style="color: #F44336;border: 1px solid #F44336;" plain="true" type="default" size="mini" data-index="{{index}}" bindtap="onCancelBan">解禁</button>
+                </view>
+                <view class="page-dm-member-time">{{tools.getOnlyDate(item.maintenanceTimestamp)}}</view>
+            </view>
+        </view>
+    </view>
+</view>

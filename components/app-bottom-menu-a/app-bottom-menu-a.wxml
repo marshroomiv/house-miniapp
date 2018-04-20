@@ -1,0 +1,21 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-bottom-menu-a">
+    <view class="app-bottom-menu-a-item" bindtap="onFavorite">
+        <view class="app-bottom-menu-a-item-img"><image src="../../image/favorite-b.png"  /></view>
+        <view>收藏</view>
+    </view>
+    <view class="app-bottom-menu-a-item" bindtap="onMoreAgent">
+        <view class="app-bottom-menu-a-item-img"><image src="../../image/home1.png"  /></view>
+        <view>Ta的房源</view>
+    </view>
+    <view class="app-bottom-menu-a-item" bindtap="onNavi">
+        <view class="app-bottom-menu-a-item-img"><image src="../../image/pos1.png"  /></view>
+        <view>地图导航</view>
+    </view>
+    <view class="app-bottom-menu-a-item" bindtap="onCall">
+        <view class="app-bottom-menu-a-item-img"><image src="../../image/call.png"  /></view>
+        <view>呼叫</view>
+    </view>
+    <view class="app-bottom-menu-a-appointment" bindtap="onAppointment">预约看房</view>
+</view>

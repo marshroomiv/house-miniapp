@@ -1,0 +1,63 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-modal-mask" style="opacity:0.5;" bindtap="onMaskClick"></view>
+
+<view class="app-filter" style="width:{{width}}px;">
+    <view class="app-filter-header" wx:if="{{subMenu==null}}">过滤</view>
+    <view class="app-filter-header" wx:else>
+        <view>{{subMenu}}</view>
+        <image src="../../image/left_white.png" bindtap="onCloseSubMenu"></image>
+    </view>
+
+    <app-drop-down-a value="{{ {domainDistrict:domainDistrict, block:block} }}" bindcomponentevent="onBlockEvent" wx:if="{{subMenu == '区域'}}"></app-drop-down-a>
+    <app-drop-down-b value="{{ {list:rentPriceRange,from:priceFrom,to:priceTo } }}" bindcomponentevent="onPriceEvent" wx:if="{{subMenu == '租金'}}"></app-drop-down-b>
+    <app-drop-down-b value="{{ {list:[[0,60],[60,90],[90,120],[120,150],[150,180],[180,240],[240,320],[320,600],[600,999999999]],from:areaFrom, to:areaTo } }}" bindcomponentevent="onAreaEvent" wx:if="{{subMenu == '面积'}}"></app-drop-down-b>
+    <app-drop-down-c value="{{ {list:['1室','2室','3室','4室','5室','6室','7室','8室以上'], selected: chamber } }}" bindcomponentevent="onChamberEvent" wx:if="{{subMenu == '户型'}}"></app-drop-down-c>
+    <app-drop-down-c value="{{ {list:['住宅','别墅','商铺','写字楼'], selected: type } }}" bindcomponentevent="onTypeEvent" wx:if="{{subMenu == '用途'}}"></app-drop-down-c>
+
+
+    <view style="width:100%;padding-left:10px;">
+        <view class="app-filter-item" bindtap="onBlock">
+            <view>区域</view>
+            <view class="app-filter-item-condition" wx:if="{{domainDistrict==null}}">不限</view>
+            <view class="app-filter-item-condition"  wx:else>
+                {{domainDistrict.districtName}}<block wx:if="{{block!=null}}">-{{block.blockName}}</block>
+            </view>
+            <image src="../../image/right_grey.png"></image>
+        </view>
+        <view class="app-filter-item" bindtap="onPrice">
+            <view>租金</view>
+            <view class="app-filter-item-condition" wx:if="{{priceFrom==null}}">不限</view>
+            <view class="app-filter-item-condition" wx:if="{{priceFrom==0}}">{{priceTo}}元以下</view>
+            <view class="app-filter-item-condition" wx:if="{{priceFrom>0 && priceTo<999999999}}">{{priceFrom}}-{{priceTo}}元</view>
+            <view class="app-filter-item-condition" wx:if="{{priceTo==999999999}}">{{priceFrom}}元以上</view>
+            <image src="../../image/right_grey.png"></image>
+        </view>
+        <view class="app-filter-item" bindtap="onArea">
+            <view>面积</view>
+            <view class="app-filter-item-condition" wx:if="{{areaFrom==null}}">不限</view>
+            <view class="app-filter-item-condition" wx:if="{{areaFrom==0}}">{{areaTo}}平米以下</view>
+            <view class="app-filter-item-condition" wx:if="{{areaFrom>0 && areaTo<999999999}}">{{areaFrom}}-{{areaTo}}平米</view>
+            <view class="app-filter-item-condition" wx:if="{{areaTo==999999999}}">{{areaFrom}}平米以上</view>
+            <image src="../../image/right_grey.png"></image>
+        </view>
+        <view class="app-filter-item" bindtap="onChamber">
+            <view>户型</view>
+            <view class="app-filter-item-condition" wx:if="{{chamber==null}}">不限</view>
+            <view class="app-filter-item-condition" wx:else>{{chamber}}</view>
+            <image src="../../image/right_grey.png"></image>
+        </view>
+        <view class="app-filter-item" bindtap="onType">
+            <view>用途</view>
+            <view class="app-filter-item-condition" wx:if="{{type==null}}">不限</view>
+            <view class="app-filter-item-condition" wx:else>{{type}}</view>
+            <image src="../../image/right_grey.png"></image>
+        </view>
+
+        <view class="app-filter-bottom">
+            <view class="app-filter-bottom-left" bindtap="onRest">重置</view>
+            <view class="app-filter-bottom-right" bindtap="onSearch">确定</view>
+        </view>
+    </view>
+
+</view>

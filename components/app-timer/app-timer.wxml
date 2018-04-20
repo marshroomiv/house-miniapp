@@ -1,0 +1,15 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-timer" wx:if="{{days!=null}}">
+    <block wx:if="{{days=='0'}}">
+        <view class="app-timer-num">{{hours}}</view>
+        <view class="app-timer-ico">:</view>
+        <view class="app-timer-num">{{minutes}}</view>
+        <view class="app-timer-ico">:</view>
+        <view class="app-timer-num">{{seconds}}</view>
+    </block>
+    <block wx:else>
+        <view class="app-timer-num">{{days}}</view>
+        <view class="app-timer-ico app-timer-ico1">天</view>
+    </block>
+</view>

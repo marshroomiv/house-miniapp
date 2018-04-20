@@ -1,0 +1,10 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+
+<view class="page-more-agent-rent">
+
+    <app-agent value="{{ {agent: agent} }}"></app-agent>
+
+    <app-rent-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjects} }}"></app-rent-house-list>
+
+</view>

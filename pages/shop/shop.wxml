@@ -1,0 +1,131 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+<import src="../../wxParse/wxParse.wxml"/>
+
+<block wx:if="{{domainWmaContacts!=null && domainWmaContacts.length>0}}">
+    <block wx:if="{{domainWmaContacts.length==1}}">
+        <view>
+            <map
+                    style="width: 100%; height: 300px;"
+                    latitude="{{domainWmaContacts[0].latitude}}"
+                    longitude="{{domainWmaContacts[0].longitude}}"
+                    markers="{{ [{latitude: domainWmaContacts[0].latitude,longitude: domainWmaContacts[0].longitude,name: domainWmaContacts[0].shopName}] }}"
+            >
+            </map>
+
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">联系人</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input">{{domainWmaContacts[0].name}}</view>
+                    </view>
+                    <button size="mini"  plain="true" type="primary"  bindtap="onNavi" data-index="0"  wx:if="{{domainWmaContacts[0].longitude!=null}}">导航</button>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">电话/手机</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input">{{domainWmaContacts[0].phone}}</view>
+                    </view>
+                    <button size="mini"  plain="true" type="primary" bindtap="onCall" data-phone="{{domainWmaContacts[0].phone}}" >呼叫</button>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">地址</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input" style="overflow:hidden;">{{domainWmaContacts[0].districtName}} {{domainWmaContacts[0].addressDetail}}</view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="page-shop-aboutus" wx:if="{{domainWmaContacts[0].cmsUid!=null && article!=null}}">
+                <view class="page-shop-aboutus-header">
+                    <view class="page-shop-aboutus-header-border"></view>
+                    <view class="page-shop-aboutus-header-name">关于我们<text class="page-shop-aboutus-header-ico">ABOUT US</text></view>
+                </view>
+
+                <view class="page-shop-cms">
+                    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+                </view>
+
+            </view>
+
+        </view>
+    </block>
+
+    <block wx:else>
+        <view class="page-shop">
+            <scroll-view scroll-y class="page-shop-left">
+                    <view wx:for="{{domainWmaContacts}}" wx:key="domainWmaContactUid" class="page-shop-left-item {{index == activeIndex?'page-shop-left-item-selected':''}}" bindtap="onItemTap" data-index="{{index}}">
+                    <view class="page-shop-left-item-txt">{{item.shopName}}</view>
+                </view>
+            </scroll-view>
+
+            <scroll-view scroll-y class="page-shop-right" style="width: {{(width - 84)}}px;">
+                <view>
+                    <map
+                            style="width: 100%; height: 200px;"
+                            latitude="{{domainWmaContacts[activeIndex].latitude}}"
+                            longitude="{{domainWmaContacts[activeIndex].longitude}}"
+                            markers="{{ [{latitude: domainWmaContacts[activeIndex].latitude,longitude: domainWmaContacts[activeIndex].longitude,name: domainWmaContacts[activeIndex].shopName}] }}"
+                    >
+                    </map>
+
+                    <view class="weui-cells weui-cells_after-title">
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label" style="width:85px;">联系人</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <view class="weui-input">{{domainWmaContacts[activeIndex].name}}</view>
+                            </view>
+                            <button size="mini"  plain="true" type="primary"  bindtap="onNavi" data-index="{{activeIndex}}"  wx:if="{{domainWmaContacts[activeIndex].longitude!=null}}">导航</button>
+                        </view>
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label" style="width:85px;">电话/手机</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <view class="weui-input">{{domainWmaContacts[activeIndex].phone}}</view>
+                            </view>
+                            <button size="mini"  plain="true" type="primary" bindtap="onCall" data-phone="{{domainWmaContacts[activeIndex].phone}}" >呼叫</button>
+                        </view>
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label" style="width:85px;">地址</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <view class="weui-input" style="overflow:hidden;">{{domainWmaContacts[activeIndex].districtName}} {{domainWmaContacts[activeIndex].addressDetail}}</view>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class="page-shop-aboutus" style="padding: 10px 5px;" wx:if="{{domainWmaContacts[activeIndex].cmsUid!=null && article!=null}}">
+                        <view class="page-shop-aboutus-header">
+                            <view class="page-shop-aboutus-header-border"></view>
+                            <view class="page-shop-aboutus-header-name">关于我们<text class="page-shop-aboutus-header-ico">ABOUT US</text></view>
+                        </view>
+
+                        <view class="page-shop-cms">
+                            <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+                        </view>
+
+                    </view>
+
+                </view>
+
+
+            </scroll-view>
+
+        </view>
+    </block>
+
+</block>
+
+
+<app-contact-icon></app-contact-icon>
+
+<app-home-icon wx:if="{{sharerUid!=null}}"></app-home-icon>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "买房",
+  "usingComponents": {
+    "app-menu-a": "../../components/app-menu-a/app-menu-a",
+    "app-house-list": "../../components/app-house-list/app-house-list"
+  }
+}

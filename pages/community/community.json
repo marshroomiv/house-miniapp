@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "小区详情",
+  "usingComponents": {
+    "app-swiper": "../../components/app-swiper/app-swiper"
+  }
+}

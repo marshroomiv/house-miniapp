@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "小程序文章",
+  "usingComponents": {
+    "app-home-icon": "../../components/app-home-icon/app-home-icon"
+  }
+}

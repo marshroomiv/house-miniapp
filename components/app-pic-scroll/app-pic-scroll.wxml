@@ -1,0 +1,8 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view wx:if="{{value != null && value.imgUrls!=null}}">
+    <block wx:for="{{value.imgUrls}}" wx:key="img">
+        <image class="app-pic-scroll-image" src="{{tools.getPicUrl(item.img,value.thumbnailSuffix)}}" data-url="{{item.url}}" lazy-load="true" mode="widthFix" bindtap="onPicScrollItemTap" />
+    </block>
+</view>
+

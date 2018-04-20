@@ -1,0 +1,25 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-modal-mask" style="opacity:{{opacity}};"></view>
+
+<view class="app-modal-container" style="opacity:{{opacity * 2}};">
+    <view class="app-form-a">
+        <view class="app-form-a-form">
+            <view class="app-form-a-form-title">经纪人信息</view>
+            <view class="app-form-a-form-top">
+                <view class="app-form-a-form-item">
+                    <view style="width:30%">姓名:</view>
+                    <input value="{{value.userObject.nickName}}" bindinput="onNameInput"/>
+                </view>
+                <view class="app-form-a-form-item">
+                    <view style="width:30%">手机:</view>
+                    <input value="{{value.userObject.phone}}" bindinput="onPhoneInput"/>
+                </view>
+            </view>
+            <view class="app-form-a-form-bottom">
+                <view class="app-form-a-form-bottom-btn" bindtap="onCancel">取消</view>
+                <view class="app-form-a-form-bottom-btn" style="border-left:1px solid rgb(223,223,223);color:#1296db;" bindtap="onOk">确定</view>
+            </view>
+        </view>
+    </view>
+</view>

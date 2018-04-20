@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "房源详情",
+  "usingComponents": {
+    "app-swiper": "../../components/app-swiper/app-swiper",
+    "app-agent": "../../components/app-agent/app-agent",
+    "app-bottom-menu-a": "../../components/app-bottom-menu-a/app-bottom-menu-a",
+    "app-home-icon": "../../components/app-home-icon/app-home-icon",
+    "app-rent-house-list": "../../components/app-rent-house-list/app-rent-house-list"
+  }
+}

@@ -1,0 +1,128 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-my">
+    <view class="page-my-head">
+        <image src="{{tools.IMG_URL + 'assets/img/bg.jpg'}}" mode="widthFix" class="page-my-head-bg"></image>
+        <view class="page-my-head-img-outer" bindtap="onUserInfo">
+            <image wx:if="{{user!=null}}" src="{{user.headImageUrl}}"  class="page-my-head-img"></image>
+            <image wx:else src="../../image/aru.png"  class="page-my-head-img"></image>
+        </view>
+        <view class="page-my-head-name" wx:if="{{user!=null}}">{{user.nickName}}</view>
+    </view>
+
+    <view class="page-my-member">
+        <view class="page-my-member-head">会员中心</view>
+        <view class="page-my-member-items">
+            <view class="page-my-member-item" bindtap="onMyHouse" >
+                <view class="page-my-member-item-container">
+                    <image src="../../image/new_house.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>我的房源</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onFocus" >
+                <view class="page-my-member-item-container">
+                    <image src="../../image/agent_follow.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>我的关注</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onCollect" >
+                <view class="page-my-member-item-container">
+                    <image src="../../image/favorite-b.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>我的收藏</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onAppointment">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/time.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>预约查询</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onShareTap">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/share.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>分享点击</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onWmaCodeTap">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/wma.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>小程序码</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onQrCodeTap">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/qrcode.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>二维码</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onClearCache">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/clearcache.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>清除缓存</view>
+            </view>
+        </view>
+    </view>
+
+
+    <view class="page-my-member" wx:if="{{isDomainAdmin}}">
+        <view class="page-my-member-head">管理中心</view>
+        <view class="page-my-member-items">
+            <view class="page-my-member-item" bindtap="onDmAppointment" wx:if="{{domain.appointmentDays!=null && domain.appointmentDays>0}}" >
+                <view class="page-my-member-item-container">
+                    <image src="../../image/appointment.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>预约查询</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onDmChat">
+                <view class="page-my-member-item-container">
+                    <image style="width:32px;height:32px;" src="../../image/wx.png"  class="page-my-member-item-img"></image>
+                    <view class="weui-badge" style="position: absolute;top: -10px;right: -10px;" wx:if="{{newMsgCount>0}}">{{newMsgCount}}</view>
+                </view>
+                <view>客服聊天</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onDmMember">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/admin.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>会员管理</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onDmAppointmentList">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/time.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>预约管理</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onWeb" wx:if="{{domainWppUid!=null}}">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/web.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>后台管理</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onBackend">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/link.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>后台链接</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onImage">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/image.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>图片素材</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onVideo">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/media.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>视频素材</view>
+            </view>
+            <view class="page-my-member-item" bindtap="onDomainScan">
+                <view class="page-my-member-item-container">
+                    <image src="../../image/scan.png"  class="page-my-member-item-img"></image>
+                </view>
+                <view>扫一扫</view>
+            </view>
+        </view>
+    </view>
+</view>

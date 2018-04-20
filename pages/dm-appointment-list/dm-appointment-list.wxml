@@ -1,0 +1,109 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-appointment-list">
+
+    <block wx:for="{{appointments}}" wx:key="appointmentUid" >
+        <view class="page-appointment-list-item" style="margin-bottom:10px;" wx:if="{{!item.deleted}}">
+
+            <image src="../../image/closed.png" class="page-appointment-list-closed" wx:if="{{item.appointmentStatusCode=='CLOSED'}}"></image>
+            <image src="../../image/del.png" class="page-appointment-list-close" bindtap="onDelete" data-index="{{index}}"></image>
+
+            <view class="weui-panel weui-panel_access" wx:if="{{item.houseCoverPicturePath!=null}}" style="margin-bottom:-1px;">
+                <view class="weui-panel__bd">
+                    <view class="weui-media-box weui-media-box_appmsg">
+                        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                            <image class="weui-media-box__thumb" src="{{ tools.getPicUrl(item.houseCoverPicturePath,'_200_0') }}" lazy-load="true" />
+                        </view>
+                        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__title">{{ item.houseTitle }}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">昵称</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input">{{item.name}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">手机</view>
+                        <image class="page-appointment-list-phone" src="../../image/phone.png" bindtap="onCall" data-phone="{{item.phone}}" />
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input">{{item.phone}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">时间</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input">{{tools.getDateTime(item.appointmentTimestamp)}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">需求</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input">{{tools.getLookup(dictionaries, item.requirementTypeCode)}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title" wx:if="{{item.agentName !=null}}">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">经纪人姓名</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input">{{item.agentName}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title" wx:if="{{item.agentPhone !=null}}">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">经纪人手机</view>
+                        <image class="page-appointment-list-phone" src="../../image/phone.png" bindtap="onCall" data-phone="{{item.agentPhone}}" />
+                    </view>
+                    <view class="weui-cell__bd">
+                        <view class="weui-input">{{item.agentPhone}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">留言</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" disabled/>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="page-appointment-textarea">
+                    <textarea value="{{item.comment}}" disabled/>
+                </view>
+            </view>
+            <view class="page-appointment-list-item-btns" wx:if="{{item.appointmentStatusCode=='OPEN'}}">
+                <button size="mini"  plain="true" bindtap="onClose" type="warn" data-index="{{index}}">关闭</button>
+                <button size="mini"  plain="true" bindtap="onEdit" type="primary" data-index="{{index}}">修改</button>
+            </view>
+
+        </view>
+    </block>
+
+
+</view>

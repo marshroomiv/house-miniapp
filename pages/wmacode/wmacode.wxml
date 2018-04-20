@@ -1,0 +1,10 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-wmacode">
+    <view class="page-wmacode-img" wx:if="{{wmaCodeUrl!=null}}">
+        <image src="{{tools.FILE_URL + wmaCodeUrl}}" mode="widthFix"></image>
+    </view>
+    <view class="page-wmacode-btn">
+        <button  bindtap="onSaveWmaCode" type="primary" size="mini">保存</button>
+    </view>
+</view>

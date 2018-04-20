@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "同经纪人房源",
+  "usingComponents": {
+    "app-agent": "../../components/app-agent/app-agent",
+    "app-house-list": "../../components/app-house-list/app-house-list"
+  }
+}

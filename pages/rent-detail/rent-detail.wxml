@@ -1,0 +1,187 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<import src="../../wxParse/wxParse.wxml"/>
+
+<app-swiper value="{{ appSwiper_0 }}" ></app-swiper>
+
+<view class="page-detail" wx:if="{{houseObject!=null}}">
+    <view class="page-detail-head">
+        <view class="page-detail-head-title">{{houseObject.houseTitle}}</view>
+        <view class="page-detail-head-community">{{ tools.getCommunityAndBlock2(communityObject, blocks) }}</view>
+        <view class="page-detail-head-price">
+            <view class="page-detail-head-total-price">{{ tools.getPriceInteger(houseObject.price) }}{{ tools.getPriceDecimal(houseObject.price) }}元/月</view>
+            <view class="page-detail-head-unit-price">{{ tools.getPriceInteger(houseObject.unitPrice) }}{{ tools.getPriceDecimal(houseObject.unitPrice) }}元/m<em>2</em>.天</view>
+        </view>
+    </view>
+
+    <app-agent value="{{ {agent: agent, sellIndicator:'N'} }}"></app-agent>
+
+    <view class="page-detail-info">
+        <view class="page-detail-info-title">
+            <image src="../../image/info.png" style="width:24px;height:24px;"></image>
+            <view>房源信息</view>
+        </view>
+
+        <view class="page-detail-info-item">
+            <view>面积:　{{ tools.getPriceInteger(houseObject.area) }}{{ tools.getPriceDecimal(houseObject.area) }}m<em>2</em></view>
+            <view>租金:　{{ tools.getPriceInteger(houseObject.price) }}元/月</view>
+        </view>
+
+        <view class="page-detail-info-item">
+            <view>户型:　{{ houseObject.chamberQuantity }}室{{ houseObject.hallQuantity }}厅{{ houseObject.washroomQuantity }}卫</view>
+            <view>类型:　{{tools.getLookup(dictionaries, houseObject.decorationTypeCode)}} - {{tools.getLookup(dictionaries, houseObject.propertyTypeCode)}}</view>
+        </view>
+
+        <view class="page-detail-info-item">
+            <view>楼层:　{{houseObject.floor}}/{{houseObject.floorTotal}}</view>
+            <view>年代:　{{houseObject.builtIn}}年</view>
+        </view>
+
+        <view class="page-detail-info-item1" wx:if="{{communityObject!=null}}" bindtap="onCommunity">
+            <view>小区详情:　</view>
+            <view class="theme-color">{{ communityObject.name }}</view>
+            <image src="../../image/right_grey.png"></image>
+        </view>
+
+        <view class="page-detail-info-item1" wx:if="{{rentHouseCount!=null}}" bindtap="onMoreCommunity">
+            <view>出租房源:　</view>
+            <view class="theme-color">{{rentHouseCount}}</view>
+            <image src="../../image/right_grey.png"></image>
+        </view>
+
+    </view>
+
+    <view class="page-detail-info">
+        <view class="page-detail-info-title">
+            <image src="../../image/feature.png" style="width:24px;height:24px;"></image>
+            <view>特点描述</view>
+        </view>
+
+        <view class="page-detail-info-desc" wx:if="{{houseObject.houseDescription!=null}}">{{houseObject.houseDescription}}</view>
+
+        <view class="wxParse page-detail-info-cms" wx:if="{{houseObject.cmsUid!=null && article!=null}}">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+    </view>
+
+
+    <view class="page-detail-info" wx:if="{{communityObject!=null && communityObject.mapPicturePath!=null}}" >
+        <view class="page-detail-info-title">
+            <image src="../../image/house_info.png" style="width:24px;height:24px;"></image>
+            <view>配套信息</view>
+        </view>
+
+        <view class="app-static-map" style="margin-top:10px;">
+            <image src="{{ tools.getPicUrl(communityObject.mapPicturePath) }}" mode="widthFix" style="width:100%;"></image>
+            <view class="app-static-map-info">
+                <view class="app-static-map-info-label">
+                    <view class="app-static-map-info-label-txt" bindtap="onNavi">{{communityObject.name}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="page-detail-info" wx:if="{{schools!=null && schools.length>0}}">
+        <view class="page-detail-info-title">
+            <image src="../../image/schools.png" style="width:24px;height:24px;"></image>
+            <view>学校</view>
+        </view>
+
+        <view wx:for="{{schools}}" wx:key="communityFacilityUid" class="page-detail-info-item2">
+            <view>{{item.name}}</view>
+            <view class="page-detail-distance">{{item.distance}}米</view>
+        </view>
+    </view>
+
+    <view class="page-detail-info" wx:if="{{hospitals!=null && hospitals.length>0}}">
+        <view class="page-detail-info-title">
+            <image src="../../image/hospitals.png" style="width:24px;height:24px;"></image>
+            <view>医院</view>
+        </view>
+
+        <view wx:for="{{hospitals}}" wx:key="communityFacilityUid" class="page-detail-info-item2">
+            <view>{{item.name}}</view>
+            <view class="page-detail-distance">{{item.distance}}米</view>
+        </view>
+
+    </view>
+
+    <view class="page-detail-info" wx:if="{{subways!=null && subways.length>0}}">
+        <view class="page-detail-info-title">
+            <image src="../../image/subways.png" style="width:24px;height:24px;"></image>
+            <view>地铁站</view>
+        </view>
+
+        <view wx:for="{{subways}}" wx:key="communityFacilityUid" class="page-detail-info-item2">
+            <view>{{item.name}}</view>
+            <view class="page-detail-distance">{{item.distance}}米</view>
+        </view>
+
+    </view>
+
+    <view class="page-detail-info" wx:if="{{publicTrans!=null && publicTrans.length>0}}">
+        <view class="page-detail-info-title">
+            <image src="../../image/publicTrans.png" style="width:24px;height:24px;"></image>
+            <view>公交站</view>
+        </view>
+
+        <view wx:for="{{publicTrans}}" wx:key="communityFacilityUid" class="page-detail-info-item2">
+            <view>{{item.name}}</view>
+            <view class="page-detail-distance">{{item.distance}}米</view>
+        </view>
+
+    </view>
+
+
+    <view class="page-detail-info" wx:if="{{malls!=null && malls.length>0}}">
+        <view class="page-detail-info-title">
+            <image src="../../image/malls.png" style="width:24px;height:24px;"></image>
+            <view>商场</view>
+        </view>
+
+        <view wx:for="{{malls}}" wx:key="communityFacilityUid" class="page-detail-info-item2">
+            <view>{{item.name}}</view>
+            <view class="page-detail-distance">{{item.distance}}米</view>
+        </view>
+
+    </view>
+
+    <view class="page-detail-info" wx:if="{{caterings!=null && caterings.length>0}}">
+        <view class="page-detail-info-title">
+            <image src="../../image/caterings.png" style="width:24px;height:24px;"></image>
+            <view>餐饮</view>
+        </view>
+
+        <view wx:for="{{caterings}}" wx:key="communityFacilityUid" class="page-detail-info-item2">
+            <view>{{item.name}}</view>
+            <view class="page-detail-distance">{{item.distance}}米</view>
+        </view>
+
+    </view>
+
+    <view class="page-detail-info" wx:if="{{entertainments!=null && entertainments.length>0}}">
+        <view class="page-detail-info-title">
+            <image src="../../image/entertainments.png" style="width:24px;height:24px;"></image>
+            <view>休闲娱乐</view>
+        </view>
+
+        <view wx:for="{{entertainments}}" wx:key="communityFacilityUid" class="page-detail-info-item2">
+            <view>{{item.name}}</view>
+            <view class="page-detail-distance">{{item.distance}}米</view>
+        </view>
+
+    </view>
+
+    <view class="page-detail-info" wx:if="{{similarHouseObjects!=null && similarHouseObjects.length>0}}" >
+        <view class="page-detail-info-title">
+            <image src="../../image/house_info.png" style="width:24px;height:24px;"></image>
+            <view>同价位房源</view>
+        </view>
+
+        <app-rent-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: similarHouseObjects} }}"></app-rent-house-list>
+    </view>
+</view>
+
+<app-bottom-menu-a value="{{ {agent: agent, communityObject: communityObject, houseObject: houseObject, sellIndicator:'N'} }}"></app-bottom-menu-a>
+
+<app-home-icon wx:if="{{sharerUid!=null}}"></app-home-icon>

@@ -1,0 +1,10 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-qrcode">
+    <view class="page-qrcode-img" wx:if="{{qrCodeUrl!=null}}">
+        <image src="{{tools.FILE_URL + qrCodeUrl}}" mode="widthFix"></image>
+    </view>
+    <view class="page-qrcode-btn" >
+        <button  bindtap="onSaveQrCode" type="primary" size="mini">保存</button>
+    </view>
+</view>

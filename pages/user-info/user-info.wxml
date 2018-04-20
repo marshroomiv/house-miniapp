@@ -1,0 +1,32 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="weui-panel weui-panel_access">
+    <view class="weui-panel__bd" wx:if="{{user!=null}}">
+        <view class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{user.headImageUrl==null?'../../image/head.png':user.headImageUrl}}"/>
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">{{user.nickName==null?"保密":user.nickName}}</view>
+            </view>
+        </view>
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view  class="weui-cell weui-cell_access" >
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>网站号</view>
+                    </view>
+                    <view class="weui-cell__ft" style="font-size:13px;">{{user.domainUid}}</view>
+                </view>
+
+                <view  class="weui-cell weui-cell_access" >
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>用户号</view>
+                    </view>
+                    <view class="weui-cell__ft" style="font-size:13px;">{{user.userUid}}</view>
+                </view>
+            </view>
+
+        </view>
+    </view>
+</view>

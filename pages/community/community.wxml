@@ -1,0 +1,91 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<import src="../../wxParse/wxParse.wxml"/>
+
+<app-swiper value="{{ appSwiper_0 }}"></app-swiper>
+
+<view class="page-community" wx:if="{{communityObject!=null}}">
+    <view class="page-community-head">
+        <view class="page-community-head-name">{{communityObject.name}}</view>
+        <view class="page-community-head-block" wx:if="{{block!=null}}">{{communityObject.districtName}}-{{ block.blockName }}</view>
+    </view>
+
+    <view class="page-community-info">
+        <view class="page-community-info-title">
+            <image src="../../image/info.png" style="width:24px;height:24px;"></image>
+            <view>小区信息</view>
+        </view>
+
+        <view class="page-community-info-item">
+            <view>物业类型:　<block wx:if="{{communityObject.propertyTypeCode!=null}}">{{tools.getLookup(dictionaries, communityObject.propertyTypeCode)}}</block></view>
+            <view>物 业 费:　<block wx:if="{{communityObject.propertyFee!=null}}">{{ tools.getPriceInteger(communityObject.propertyFee) }}{{ tools.getPriceDecimal(communityObject.propertyFee) }}元/m<em>2</em>.月</block></view>
+        </view>
+
+        <view class="page-community-info-item">
+            <view>占地面积:　<block wx:if="{{communityObject.siteArea!=null}}">{{communityObject.siteArea}}m<em>2</em></block></view>
+            <view>容 积 率:　<block wx:if="{{communityObject.plotRatio!=null}}">{{ tools.getPriceInteger(communityObject.plotRatio) }}{{ tools.getPriceDecimal(communityObject.plotRatio) }}</block></view>
+        </view>
+
+        <view class="page-community-info-item">
+            <view>建筑面积:　<block wx:if="{{communityObject.totalArea!=null}}">{{communityObject.totalArea}}m<em>2</em></block></view>
+            <view>总 户 数:　<block wx:if="{{communityObject.totalHousehold!=null}}">{{communityObject.totalHousehold}}</block></view>
+        </view>
+
+        <view class="page-community-info-item">
+            <view>建造年代:　<block wx:if="{{communityObject.builtIn!=null}}">{{communityObject.builtIn}}年</block></view>
+            <view>绿 化 率:　<block wx:if="{{communityObject.greenRatio!=null}}">{{ tools.getPriceInteger(communityObject.greenRatio) }}{{ tools.getPriceDecimal(communityObject.greenRatio) }}%</block></view>
+        </view>
+
+        <view class="page-community-info-item1" wx:if="{{communityObject.developerName!=null}}">
+            <view class="page-community-info-item1-label">开 发 商:</view>
+            <view class="page-community-info-item1-value">{{communityObject.developerName}}</view>
+        </view>
+
+        <view class="page-community-info-item1" wx:if="{{communityObject.propertyCompanyName!=null}}">
+            <view class="page-community-info-item1-label">物业公司:</view>
+            <view class="page-community-info-item1-value">{{communityObject.propertyCompanyName}}</view>
+        </view>
+
+        <view class="page-community-info-item1" wx:if="{{communityObject.propertyDescription!=null}}">
+            <view class="page-community-info-item1-label">产权描述:</view>
+            <view class="page-community-info-item1-value">{{communityObject.propertyDescription}}</view>
+        </view>
+
+        <view class="page-community-info-item1" wx:if="{{communityObject.parkingLotDescription!=null}}">
+            <view class="page-community-info-item1-label">车位描述:</view>
+            <view class="page-community-info-item1-value">{{communityObject.parkingLotDescription}}</view>
+        </view>
+
+        <view class="page-community-info-item1" wx:if="{{communityObject.parkingLotDescription!=null}}">
+            <view class="page-community-info-item1-label">小区地址:</view>
+            <view class="page-community-info-item1-value">{{communityObject.provinceName}}{{tools.getCity(communityObject.cityName)}}{{communityObject.districtName}}{{communityObject.addressDetail}}</view>
+        </view>
+
+        <view class="app-static-map">
+            <image src="{{ tools.getPicUrl(communityObject.mapPicturePath) }}" mode="widthFix" style="width:100%;"></image>
+            <view class="app-static-map-info">
+                <view class="app-static-map-info-label">
+                    <view class="app-static-map-info-label-txt" bindtap="onNavi">{{communityObject.name}}</view>
+                </view>
+            </view>
+        </view>
+
+        <button type="primary" style="height:38px;line-height:38px;width:168px;" plain="true" bindtap="onNavi">地图导航</button>
+
+    </view>
+
+    <view class="page-community-info" wx:if="{{communityObject.description!=null && communityObject.cmsUid!=null}}">
+        <view class="page-community-info-title">
+            <image src="../../image/feature.png" style="width:24px;height:24px;"></image>
+            <view>特点描述</view>
+        </view>
+
+        <view class="page-community-info-desc" wx:if="{{communityObject.description!=null}}">{{communityObject.description}}</view>
+
+        <view class="wxParse page-community-info-cms" wx:if="{{communityObject.cmsUid!=null && article!=null}}">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+    </view>
+
+</view>
+

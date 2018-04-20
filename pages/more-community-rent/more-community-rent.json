@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "同小区房源",
+  "usingComponents": {
+    "app-rent-house-list": "../../components/app-rent-house-list/app-rent-house-list"
+  }
+}

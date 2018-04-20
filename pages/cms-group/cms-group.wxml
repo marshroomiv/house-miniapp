@@ -1,0 +1,31 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<scroll-view wx:if="{{list!=null}}" class="page-cms-group" style="height: {{height}}px;" scroll-y scroll-into-view="{{maxId}}">
+    <block wx:for="{{list}}" wx:key="id" wx:for-item="cmsGroupCmsList">
+        <view class="page-cms-group-time"><text class="page-cms-group-time-box">{{tools.getCnDateTime(cmsGroupCmsList.createTimestamp)}}</text></view>
+
+        <block wx:if="{{cmsGroupCmsList.cmsList.length == 1}}">
+            <view class="page-cms-group-one" data-cmsUid="{{cmsGroupCmsList.cmsList[0].cmsUid}}">
+                <image src="{{tools.getPicUrl(cmsGroupCmsList.cmsList[0].thumbUrlPath, '_750_0')}}" lazy-load="true" mode="widthFix" class="page-cms-group-one-img" data-cmsUid="{{cmsGroupCmsList.cmsList[0].cmsUid}}" bindtap="onItemTap" bindload="onImageLoad"/>
+                <text class="page-cms-group-one-title">{{cmsGroupCmsList.cmsList[0].title}}</text>
+                <text class="page-cms-group-one-text" wx:if="{{cmsGroupCmsList.cmsList[0].digest!=null}}">{{cmsGroupCmsList.cmsList[0].digest}}</text>
+            </view>
+        </block>
+
+        <block wx:else>
+            <view class="page-cms-group-list">
+                <block wx:for="{{cmsGroupCmsList.cmsList}}" wx:key="cmsUid">
+                    <view class="page-cms-group-list-per" wx:if="{{index == 0}}" data-cmsUid="{{item.cmsUid}}" bindtap="onItemTap">
+                        <view class="page-cms-group-list-per-title"><text class="page-cms-group-list-per-title-txt">{{item.title}}</text></view>
+                        <image src="{{tools.getPicUrl(item.thumbUrlPath, '_750_0')}}" lazy-load="true" mode="widthFix" class="page-cms-group-list-per-img1" bindload="onImageLoad"/>
+                    </view>
+                    <view class="page-cms-group-list-per" wx:else data-cmsUid="{{item.cmsUid}}" bindtap="onItemTap">
+                        <view class="page-cms-group-list-per-title-border"><text class="page-cms-group-list-per-title"><text class="page-cms-group-list-per-title-txt">{{item.title}}</text></text></view>
+                        <image src="{{tools.getPicUrl(item.smallThumbUrlPath, '_750_0')}}" lazy-load="true" class="page-cms-group-list-per-img"/>
+                    </view>
+                </block>
+            </view>
+        </block>
+    </block>
+    <view style="width:100;height:1px;" id="maxId"></view>
+</scroll-view>

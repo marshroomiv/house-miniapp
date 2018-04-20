@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "app-filter": "../app-rent-filter/app-rent-filter"
+  }
+}

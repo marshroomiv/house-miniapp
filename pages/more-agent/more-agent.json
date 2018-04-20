@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "同经纪人房源",
+  "usingComponents": {
+    "app-focus-agent": "../../components/app-focus-agent/app-focus-agent",
+    "app-house-list": "../../components/app-house-list/app-house-list",
+    "app-rent-house-list": "../../components/app-rent-house-list/app-rent-house-list",
+    "app-tab": "../../components/app-tab/app-tab"
+  }
+}

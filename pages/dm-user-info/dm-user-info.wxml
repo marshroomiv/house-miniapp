@@ -1,0 +1,62 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="weui-panel weui-panel_access">
+    <view class="weui-panel__bd" wx:if="{{userObject!=null}}">
+        <view class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{userObject.headImageUrl==null?'../../image/head.png':userObject.headImageUrl}}"/>
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">{{userObject.nickName==null?"保密":userObject.nickName}}</view>
+                <view class="weui-media-box__desc" wx:if="{{userObject.phone!=null}}">手机 {{userObject.phone}}</view>
+            </view>
+        </view>
+        <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+                <view  class="weui-cell weui-cell_access" >
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>网站号</view>
+                    </view>
+                    <view class="weui-cell__ft" style="font-size:13px;">{{userObject.domainUid}}</view>
+                </view>
+
+                <view  class="weui-cell weui-cell_access" >
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>用户号</view>
+                    </view>
+                    <view class="weui-cell__ft" style="font-size:13px;">{{userObject.userUid}}</view>
+                </view>
+
+                <view  class="weui-cell weui-cell_access" >
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>状态</view>
+                    </view>
+                    <view class="weui-cell__ft">{{userObject.userStatusCode=='ACTIVE'?'正常':'暂停'}}</view>
+                </view>
+
+                <view  class="weui-cell weui-cell_access" >
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>省/自治区</view>
+                    </view>
+                    <view class="weui-cell__ft" wx:if="{{userObject.province!=null}}">{{userObject.province}}</view>
+                </view>
+                <view  class="weui-cell weui-cell_access" >
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>市</view>
+                    </view>
+                    <view class="weui-cell__ft" wx:if="{{userObject.city!=null}}">{{userObject.city}}</view>
+                </view>
+
+                <navigator url="/pages/dm-login-history/dm-login-history" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd weui-cell_primary">
+                        <view>登录记录</view>
+                    </view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </navigator>
+
+
+            </view>
+
+        </view>
+    </view>
+</view>

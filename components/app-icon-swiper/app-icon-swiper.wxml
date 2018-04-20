@@ -1,0 +1,18 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view wx:if="{{value != null && value.pages!=null && value.pages.length>0}}" class="app-icon-swiper">
+    <swiper indicator-dots="{{value.pages.length>1}}" style="{{(value.pages.length==1 && value.pages[0].imgUrls.length<6)?'height:105px':''}}">
+        <block wx:for="{{value.pages}}" wx:key="pageNo" wx:for-index="pageIndex" wx:for-item="pageItem">
+            <swiper-item>
+                <view class="app-icon-swiper-container">
+                    <view wx:for="{{pageItem.imgUrls}}" wx:key="url" class="app-icon-swiper-item">
+                        <view class="app-icon-swiper-item-image">
+                            <image src="{{tools.getPicUrl(item.img,value.thumbnailSuffix)}}" data-url="{{item.url}}"  bindtap="onIconSwiperItemTap" />
+                        </view>
+                        <view class="app-icon-swiper-item-lable">{{item.label}}</view>
+                    </view>
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>

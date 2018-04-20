@@ -1,0 +1,11 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-news" wx:if="{{list!=null && list.length>0}}">
+    <image src="../../image/news.png" class="app-news-icon"></image>
+    <text class="app-news-more" bindtap="onMore">更多</text>
+    <swiper autoplay="true" interval="3000" vertical="true" circular="true" class="app-news-swiper">
+        <block wx:for="{{list}}" wx:key="*this" >
+            <swiper-item data-index="{{index}}" bindtap="onSwiperItemTap" class="app-news-swiper-item">{{item.title}}</swiper-item>
+        </block>
+    </swiper>
+</view>

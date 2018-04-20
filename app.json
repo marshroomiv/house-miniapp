@@ -1,0 +1,100 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my/my",
+
+    "pages/wmacode/wmacode",
+    "pages/qrcode/qrcode",
+    "pages/shop/shop",
+
+    "pages/dm-member/dm-member",
+    "pages/dm-chat/dm-chat",
+    "pages/dm-chat-window/dm-chat-window",
+    "pages/dm-web/dm-web",
+    "pages/dm-video/dm-video",
+    "pages/dm-image/dm-image",
+    "pages/dm-user-info/dm-user-info",
+    "pages/dm-login-history/dm-login-history",
+    "pages/dm-scan/dm-scan",
+    "pages/dm-backend/dm-backend",
+
+    "pages/share/share",
+
+    "pages/buy/buy",
+    "pages/rent/rent",
+
+    "pages/user-info/user-info",
+
+    "pages/cms/cms",
+    "pages/cms-group/cms-group",
+
+    "pages/detail/detail",
+    "pages/rent-detail/rent-detail",
+    "pages/calculator/calculator",
+    "pages/community/community",
+
+    "pages/more-community/more-community",
+    "pages/more-community-rent/more-community-rent",
+
+    "pages/more-agent-rent/more-agent-rent",
+    "pages/more-agent-sell/more-agent-sell",
+    "pages/more-agent/more-agent",
+
+    "pages/focus/focus",
+    "pages/favourite/favourite",
+
+    "pages/appointment-list/appointment-list",
+    "pages/dm-appointment-list/dm-appointment-list",
+    "pages/dm-appointment/dm-appointment",
+    "pages/appointment/appointment"
+  ],
+  "window": {
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "找物小程序",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1296db",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "image/home.png",
+      "selectedIconPath": "image/home1.png",
+      "text": "首页"
+    },
+    {
+      "pagePath": "pages/buy/buy",
+      "iconPath": "image/b.png",
+      "selectedIconPath": "image/b1.png",
+      "text": "买房"
+    },
+    {
+      "pagePath": "pages/rent/rent",
+      "iconPath": "image/r.png",
+      "selectedIconPath": "image/r1.png",
+      "text": "租房"
+    },
+    {
+      "pagePath": "pages/shop/shop",
+      "iconPath": "image/pos.png",
+      "selectedIconPath": "image/pos1.png",
+      "text": "门店"
+    },
+    {
+      "pagePath": "pages/my/my",
+      "iconPath": "image/my.png",
+      "selectedIconPath": "image/my1.png",
+      "text": "我的"
+    }]
+  },
+  "networkTimeout": {
+    "request": 30000,
+    "connectSocket": 30000,
+    "uploadFile": 30000,
+    "downloadFile": 30000
+  },
+  "debug": true
+}

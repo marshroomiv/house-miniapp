@@ -1,0 +1,21 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-drop-down-b" style="height: {{height}}px;">
+    <view class="app-drop-down-b-wrapper">
+        <view class="app-drop-down-b-item {{value.from==null?'app-drop-down-b-item-active':''}}"  data-index="-1" bindtap="onChange">不限</view>
+        <block wx:for="{{ value.list }}" wx:key="*this">
+            <view class="app-drop-down-b-item {{value.from==item[0] && value.to==item[1]?'app-drop-down-b-item-active':''}}" data-index="{{index}}" bindtap="onChange" wx:if="{{item[0]==0}}">{{item[1]}}{{value.unit}}以下</view>
+            <view class="app-drop-down-b-item {{value.from==item[0] && value.to==item[1]?'app-drop-down-b-item-active':''}}" data-index="{{index}}" bindtap="onChange" wx:if="{{item[0]>0 && item[1]<999999999}}">{{item[0]}}-{{item[1]}}{{value.unit}}</view>
+            <view class="app-drop-down-b-item {{value.from==item[0] && value.to==item[1]?'app-drop-down-b-item-active':''}}" data-index="{{index}}" bindtap="onChange" wx:if="{{item[1]==999999999}}">{{item[0]}}{{value.unit}}以上</view>
+        </block>
+    </view>
+
+    <view class="app-drop-down-b-bottom">
+        <view class="app-drop-down-b-bottom-left">
+            <input class="app-drop-down-b-bottom-input" placeholder="最低" bindblur="onFromInput" value="{{inputFrom}}" type="number"/>
+            <text class="app-drop-down-b-bottom-txt">-</text>
+            <input class="app-drop-down-b-bottom-input" placeholder="最高" bindblur="onToInput"  value="{{inputTo}}" type="number"/>
+        </view>
+        <button class="app-drop-down-b-bottom-btn" bindtap="onFilter">筛选</button>
+    </view>
+</view>

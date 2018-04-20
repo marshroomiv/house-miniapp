@@ -1,0 +1,12 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="weui-tab" wx:if="{{value != null && value.tabs!=null}}">
+    <view class="weui-navbar">
+        <block wx:for="{{value.tabs}}" wx:key="*this">
+            <view class="weui-navbar__item {{value.activeIndex == index ? 'weui-bar__item_on' : ''}}" data-index="{{index}}" bindtap="onItemTap">
+                <view class="weui-navbar__title">{{item}}</view>
+            </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{value.sliderLeft}}px; transform: translateX({{value.sliderOffset}}px); -webkit-transform: translateX({{value.sliderOffset}}px);"></view>
+    </view>
+</view>

@@ -1,0 +1,42 @@
+@import "./common/weui.wxss";
+@import "./components/common.wxss";
+
+view{
+    box-sizing:border-box;
+}
+
+.wxParse-p{
+    font-size:16px;
+}
+
+page{
+    /*background-color: #F8F8F8;*/
+    background-color:rgb(241,245,246);
+    font-size: 16px;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+    box-sizing:border-box;
+}
+
+button[type=primary][plain] {
+    color:#1296db;
+    border:1px solid #1296db;
+}
+button[type=primary][plain]:active  {
+    color:#6495ED;
+    border:1px solid #6495ED;
+}
+
+button[type=primary] {
+    color:#FFFFFF;
+    background-color:#1296db;
+}
+
+button[type=primary]:active {
+    color:#FFFFFF;
+    background-color:#6495ED;
+}
+
+.btn-disable{
+    background-color: rgb(191,191,191);
+}
+

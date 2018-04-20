@@ -1,0 +1,28 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-backend">
+
+    <view class="weui-cells__title">扫码登录</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea class="weui-textarea" maxlength="-1" style="height:100px;" value="{{loginUrl}}" disabled/>
+            </view>
+        </view>
+    </view>
+    <view class="page-backend-btn">
+        <button type="primary" size="mini" bindtap="onCopyLoginUrl">复制</button>
+    </view>
+
+    <view class="weui-cells__title">登录链接</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea class="weui-textarea" maxlength="-1" style="height:100px;" value="{{fullUrl}}" disabled/>
+            </view>
+        </view>
+    </view>
+    <view class="page-backend-btn">
+        <button type="primary" size="mini" bindtap="onCopyFullUrl">复制</button>
+    </view>
+</view>

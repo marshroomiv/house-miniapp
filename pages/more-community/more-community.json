@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "同小区房源",
+  "usingComponents": {
+    "app-house-list": "../../components/app-house-list/app-house-list"
+  }
+}

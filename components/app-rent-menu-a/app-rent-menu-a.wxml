@@ -1,0 +1,51 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-menu-a">
+
+    <block wx:if="{{sortItem=='UNIT_PRICE'}}">
+        <view class="app-menu-a-item" style="width: 25%;color:#1296db;" data-item="UNIT_PRICE" bindtap="onSort">
+            <view>单价</view>
+            <image src="../../image/up.png" wx:if="{{sortType=='UP'}}"></image>
+            <image src="../../image/down.png" wx:else></image>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="app-menu-a-item" style="width: 25%;" data-item="UNIT_PRICE" bindtap="onSort">
+            <view>单价</view>
+        </view>
+    </block>
+
+
+    <block wx:if="{{sortItem=='PRICE'}}">
+        <view class="app-menu-a-item" style="border-left:1px solid rgb(221,221,221);width: 25%;color:#1296db;" data-item="PRICE" bindtap="onSort">
+            <view>租金</view>
+            <image src="../../image/up.png" wx:if="{{sortType=='UP'}}"></image>
+            <image src="../../image/down.png" wx:else></image>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="app-menu-a-item" style="border-left:1px solid rgb(221,221,221);width: 25%;" data-item="PRICE" bindtap="onSort">
+            <view>租金</view>
+        </view>
+    </block>
+
+    <block wx:if="{{sortItem=='AREA'}}">
+        <view class="app-menu-a-item" style="border-left:1px solid rgb(221,221,221);width: 25%;color:#1296db;" data-item="AREA" bindtap="onSort">
+            <view>面积</view>
+            <image src="../../image/up.png" wx:if="{{sortType=='UP'}}"></image>
+            <image src="../../image/down.png" wx:else></image>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="app-menu-a-item" style="border-left:1px solid rgb(221,221,221);width: 25%;" data-item="AREA" bindtap="onSort">
+            <view>面积</view>
+        </view>
+    </block>
+
+    <view class="app-menu-a-item" style="border-left:1px solid rgb(221,221,221);width: 25%;" bindtap="onFilter">
+        <view>筛选</view>
+        <image src="../../image/filter.png"></image>
+    </view>
+
+    <app-filter style="{{showFilter?'':'display:none;'}}" bindcomponentevent="onFilterEvent"></app-filter>
+</view>

@@ -1,0 +1,235 @@
+//var IMG_URL = 'http://localhost:8080/';
+//var IMG_URL = 'http://huawei.zhaowu.cc/house-ui/';
+var IMG_URL = 'http://saas1.zhaowu.cc/house-ui/';
+
+//var FILE_URL = 'http://localhost:9999/saas-files/';
+//var FILE_URL = 'http://huawei.zhaowu.cc/files/';
+var FILE_URL = 'http://saas1.zhaowu.cc/files/';
+
+var log = function(obj){
+    if(obj==null){
+        console.log('obj is null');
+    }else{
+        console.log(JSON.stringify(obj))
+    }
+}
+
+var getThumbnailUrl = function(url, thumbnailSuffix) {
+    if(thumbnailSuffix == null){
+        return url;
+    }
+    var extension = url.substring(url.length-4, url.length);
+    if(extension == '.gif'){ //url have no thumbnail
+        return url;
+    }
+    var part1 = url.slice(0, url.length - 4);
+    var part2 = url.slice(url.length - 4, url.length);
+    return part1 + thumbnailSuffix + part2;
+}
+
+var getPicUrl = function(url, thumbnailSuffix) {
+    if(url == null){
+        return null;
+    }
+    if(url.indexOf('http') == 0){
+        return getThumbnailUrl(url, thumbnailSuffix);
+    }else{
+        return FILE_URL + getThumbnailUrl(url, thumbnailSuffix);
+    }
+}
+
+var getPriceInteger = function(value) {
+    if(value!=null){
+        return Math.floor(value / 100);
+    }
+    return 0;
+}
+
+var getPriceDecimal = function(value){
+    if(value!=null){
+        var value1=(Math.floor(value) % 100);
+        if(value1 == 0){
+            return '';
+        }
+
+        var valueStr = value1.toString();
+        if(valueStr.length==1){
+            return  '.0' + valueStr;
+        }else{
+            if(value1 % 10 ==0){
+                return '.' + (value1 / 10).toString();
+            }else{
+                return '.' + valueStr;
+            }
+        }
+    }
+    return '';
+}
+
+var getDateTime = function(date){
+    if(date==null){
+        return '';
+    }
+    return date.substring(0,10) + ' ' + date.substring(11,16);
+}
+
+var getOnlyDate = function(date){
+    if(date==null){
+        return '';
+    }
+    return date.substring(0,10);
+}
+
+var getCnDateTime = function(createTimestamp){
+    var today = getDate().toDateString();
+    var date = getDate(createTimestamp);
+    if(date.toDateString() == today){
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        return  (hours>10?hours:'0'+hours)+ ':' + (minutes>10?minutes:'0'+minutes);
+    }else{
+        var month = date.getMonth()+1;
+        var date1 = date.getDate();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        return month+'月'+date1+'日 '+(hours>10?hours:'0'+hours)+ ':' + (minutes>10?minutes:'0'+minutes);
+    }
+}
+
+var getCnDate = function(createTimestamp){
+    var date = getDate(createTimestamp);
+
+    var month = date.getMonth()+1;
+    var date1 = date.getDate();
+    return month+'月'+date1+'日';
+}
+
+var getLookup = function(dictionaries, code){
+    if(code==null){
+        return null;
+    }
+    if(dictionaries==null || dictionaries.length==0){
+        return code;
+    }
+
+    for(var i=0; i < dictionaries.length; i++){
+        var item = dictionaries[i];
+        if(item.dictionaryCode == code){
+            return item.dictionaryName;
+        }
+    }
+    return code;
+}
+
+var min = function(a, b){
+    a = (a==null?0:a);
+    b = (b==null?0:b);
+
+    if(a>b){
+        return b;
+    }else{
+        return a;
+    }
+}
+
+var getCommunityAndBlock1 = function(communityUid, communityObjects, blocks){
+    var ret;
+
+    if(communityUid!=null && communityObjects!=null && communityObjects.length>0){
+        for(var i=0; i< communityObjects.length; i++){
+            var item = communityObjects[i];
+            if(item.communityUid == communityUid){
+                ret = item.name + ' ' + item.districtName;
+
+                if(item.blockUid!=null && blocks!=null && blocks.length>0){
+                    for(var j=0;j<blocks.length;j++){
+                        var block = blocks[j];
+
+                        if(item.blockUid == block.blockUid){
+                            ret = ret + '-' + block.blockName;
+
+                            break;
+                        }
+                    }
+                }
+
+                break;
+            }
+        }
+    }
+
+    return ret;
+}
+
+var getCommunityAndBlock2 = function(communityObject, blocks){
+    var ret;
+
+    if(communityObject!=null){
+        ret = communityObject.name + ' ' + communityObject.districtName;
+
+        if(communityObject.blockUid!=null && blocks!=null && blocks.length>0){
+            for(var j=0;j<blocks.length;j++){
+                var block = blocks[j];
+
+                if(communityObject.blockUid == block.blockUid){
+                    ret = ret + '-' + block.blockName;
+
+                    break;
+                }
+            }
+        }
+    }
+
+    return ret;
+}
+
+var getFeatures = function(houseFeatureObjectList, features){
+    var ret;
+
+    if(houseFeatureObjectList!=null && houseFeatureObjectList.length>0 && features!=null && features.length>0){
+        ret = [];
+        for(var i=0;i<houseFeatureObjectList.length; i++){
+            var houseFeatureObject = houseFeatureObjectList[i];
+            for(var j=0;j<features.length;j++){
+                var feature = features[j];
+                if(feature.featureUid == houseFeatureObject.featureUid){
+                    ret.push(feature.featureName)
+                    break;
+                }
+            }
+        }
+    }
+    return ret;
+}
+
+var getCity= function(cityName){
+    if(cityName=='县' || cityName=='市辖区' || cityName=='省直辖县级行政区划' || cityName=='自治区直辖县级行政区划'){
+        return '';
+    }
+
+    return cityName;
+}
+
+var round = function (input){
+    return Math.round(input);
+}
+module.exports = {
+    IMG_URL: IMG_URL,
+    FILE_URL: FILE_URL,
+    log: log,
+    getThumbnailUrl: getThumbnailUrl,
+    getPicUrl: getPicUrl,
+    getPriceInteger: getPriceInteger,
+    getPriceDecimal: getPriceDecimal,
+    getDateTime: getDateTime,
+    getOnlyDate: getOnlyDate,
+    getCnDateTime: getCnDateTime,
+    getCnDate: getCnDate,
+    getLookup: getLookup,
+    min: min,
+    getCommunityAndBlock1: getCommunityAndBlock1,
+    getCommunityAndBlock2: getCommunityAndBlock2,
+    getFeatures:getFeatures,
+    getCity: getCity,
+    round: round
+};

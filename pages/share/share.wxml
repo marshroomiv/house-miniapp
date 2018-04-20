@@ -1,0 +1,21 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">分享点击明细列表</view>
+    <view class="weui-panel__bd">
+        <view wx:if="{{userShares!=null && userShares.length>0}}" class="weui-media-box weui-media-box_appmsg" wx:for="{{userShares}}" wx:key="userShareUid">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{item.headImageUrl}}" wx:if="{{item.headImageUrl!=null}}" lazy-load="true"/>
+                <image class="weui-media-box__thumb" src="../../image/aru.png" wx:else/>
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title" wx:if="{{item.nickName!=null}}">{{item.nickName}}</view>
+                <view class="weui-media-box__title" wx:else>保密</view>
+                <view class="weui-media-box__desc page-share-time">{{tools.getDateTime(item.createTimestamp)}}</view>
+            </view>
+        </view>
+        <view wx:if="{{userShares==null || userShares.length==0}}" class="weui-media-box weui-media-box_appmsg">
+            无分享记录
+        </view>
+    </view>
+</view>

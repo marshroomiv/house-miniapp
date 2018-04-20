@@ -1,0 +1,407 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-calculator-tab">
+    <view class="page-calculator-tab-hd">
+        <view class="{{topActive==0?'page-calculator-tab-hd-on':''}}" data-index="0" bindtap="onSetTopActive">等额本息</view>
+        <view class="{{topActive==1?'page-calculator-tab-hd-on':''}}" data-index="1" bindtap="onSetTopActive">等额本金</view>
+    </view>
+    <view class="page-calculator-tab-bd">
+        <view wx:if="{{topActive==0 && radioActive==0}}">
+            <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                <text>首付</text>
+                <text class="page-calculator-tab-bd-half-money">￥{{ tools.round((totalAmount - loanAmount) * 100) /100 }}万</text>
+            </view>
+            <view class="page-calculator-tab-bd-half">
+                <text>月供</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment) }}元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:else>￥0元</text>
+            </view>
+            <view class="clear"></view>
+            <view class="page-calculator-tab-bd-btm">
+                <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                    <text>还款总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null}}">￥{{ tools.round(accumulationFundResult.sum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="page-calculator-tab-bd-half">
+                    <text>利息总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null}}">￥{{ tools.round(accumulationFundResult.interestSum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+
+        <view wx:if="{{topActive==0 && radioActive==1}}">
+            <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                <text>首付</text>
+                <text class="page-calculator-tab-bd-half-money">￥{{ tools.round((totalAmount - loanAmount) * 100) /100 }}万</text>
+            </view>
+            <view class="page-calculator-tab-bd-half">
+                <text>月供</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult!=null}}">￥{{ tools.round(commercialResult.installments[0].installment) }}元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:else>￥0元</text>
+            </view>
+            <view class="clear"></view>
+            <view class="page-calculator-tab-bd-btm">
+                <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                    <text>还款总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult!=null}}">￥{{ tools.round(commercialResult.sum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="page-calculator-tab-bd-half">
+                    <text>利息总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult!=null}}">￥{{ tools.round(commercialResult.interestSum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+
+        <view wx:if="{{topActive==0 && radioActive==2}}">
+            <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                <text>首付</text>
+                <text class="page-calculator-tab-bd-half-money">￥{{ tools.round((totalAmount - loanAmount) * 100) /100 }}万</text>
+            </view>
+            <view class="page-calculator-tab-bd-half">
+                <text>月供</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult==null}}">￥0元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult==null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment) }}元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult!=null}}">￥{{ tools.round(commercialResult.installments[0].installment) }}元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult!=null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment + commercialResult.installments[0].installment) }}元</text>
+            </view>
+            <view class="clear"></view>
+
+            <view class="page-calculator-tab-bd-btm">
+                <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                    <text>公积金月供</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null}}">￥0元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥{{ tools.round(accumulationFundResult.installments[0].installment) }}元</text>
+                </view>
+                <view class="page-calculator-tab-bd-half">
+                    <text>商贷月供</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult==null}}">￥0元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥{{ tools.round(commercialResult.installments[0].installment) }}元</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+
+            <view class="page-calculator-tab-bd-btm">
+                <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                    <text>还款总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult==null}}">￥0万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult==null}}">￥{{ tools.round(accumulationFundResult.sum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult!=null}}">￥{{ tools.round(commercialResult.sum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult!=null}}">￥{{ tools.round((accumulationFundResult.sum + commercialResult.sum) / 100) / 100 }}万</text>
+                </view>
+                <view class="page-calculator-tab-bd-half">
+                    <text>利息总额</text><text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult==null}}">￥0万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult==null}}">￥{{ tools.round(accumulationFundResult.interestSum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult!=null}}">￥{{ tools.round(commercialResult.interestSum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult!=null}}">￥{{ tools.round((accumulationFundResult.interestSum + commercialResult.interestSum) / 100) / 100 }}万</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+
+        </view>
+
+
+        <view wx:if="{{topActive==1 && radioActive==0}}">
+            <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                <text>首付</text>
+                <text class="page-calculator-tab-bd-half-money">￥{{ tools.round((totalAmount - loanAmount) * 100) /100 }}万</text>
+            </view>
+            <view class="page-calculator-tab-bd-half">
+                <text>首月月供</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment) }}元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:else>￥0元</text>
+            </view>
+            <view class="clear"></view>
+            <view class="page-calculator-tab-bd-btm">
+                <view class="page-calculator-tab-bd-third page-calculator-tab-brd">
+                    <text>还款总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null}}">￥{{ tools.round(accumulationFundResult.sum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="page-calculator-tab-bd-third page-calculator-tab-brd">
+                    <text>利息总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null}}">￥{{ tools.round(accumulationFundResult.interestSum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="page-calculator-tab-bd-third">
+                    <text>每月递减</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment - accumulationFundResult.installments[1].installment) }}元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+
+        <view wx:if="{{topActive==1 && radioActive==1}}">
+            <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                <text>首付</text>
+                <text class="page-calculator-tab-bd-half-money">￥{{ tools.round((totalAmount - loanAmount) * 100) /100 }}万</text>
+            </view>
+            <view class="page-calculator-tab-bd-half">
+                <text>首月月供</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult!=null}}">￥{{ tools.round(commercialResult.installments[0].installment) }}元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:else>￥0元</text>
+            </view>
+            <view class="clear"></view>
+            <view class="page-calculator-tab-bd-btm">
+                <view class="page-calculator-tab-bd-third page-calculator-tab-brd">
+                    <text>还款总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult!=null}}">￥{{ tools.round(commercialResult.sum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="page-calculator-tab-bd-third page-calculator-tab-brd">
+                    <text>利息总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult!=null}}">￥{{ tools.round(commercialResult.interestSum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="page-calculator-tab-bd-third">
+                    <text>每月递减</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult!=null}}">￥{{ tools.round(commercialResult.installments[0].installment - commercialResult.installments[1].installment) }}元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥0万</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+
+        <view wx:if="{{topActive==1 && radioActive==2}}">
+            <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                <text>首付</text>
+                <text class="page-calculator-tab-bd-half-money">￥{{ tools.round((totalAmount - loanAmount) * 100) /100 }}万</text>
+            </view>
+            <view class="page-calculator-tab-bd-half">
+                <text>首月月供</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult==null}}">￥0元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult==null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment) }}元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult!=null}}">￥{{ tools.round(commercialResult.installments[0].installment) }}元</text>
+                <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult!=null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment + commercialResult.installments[0].installment) }}元</text>
+            </view>
+            <view class="clear"></view>
+
+            <view class="page-calculator-tab-bd-btm">
+                <view class="page-calculator-tab-bd-half page-calculator-tab-brd">
+                    <text>公积金月供</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null}}">￥0元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥{{ tools.round(accumulationFundResult.installments[0].installment) }}元</text>
+                </view>
+                <view class="page-calculator-tab-bd-half">
+                    <text>商贷月供</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{commercialResult==null}}">￥0元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:else>￥{{ tools.round(commercialResult.installments[0].installment) }}元</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+
+            <view class="page-calculator-tab-bd-btm">
+                <view class="page-calculator-tab-bd-third page-calculator-tab-brd">
+                    <text>还款总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult==null}}">￥0万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult==null}}">￥{{ tools.round(accumulationFundResult.sum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult!=null}}">￥{{ tools.round(commercialResult.sum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult!=null}}">￥{{ tools.round((accumulationFundResult.sum + commercialResult.sum) / 100) / 100 }}万</text>
+                </view>
+                <view class="page-calculator-tab-bd-third page-calculator-tab-brd">
+                    <text>利息总额</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult==null}}">￥0万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult==null}}">￥{{ tools.round(accumulationFundResult.interestSum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult!=null}}">￥{{ tools.round(commercialResult.interestSum / 100) / 100 }}万</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult!=null}}">￥{{ tools.round((accumulationFundResult.interestSum + commercialResult.interestSum) / 100) / 100 }}万</text>
+                </view>
+                <view class="page-calculator-tab-bd-third">
+                    <text>每月递减</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult==null}}">￥0元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult==null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment - accumulationFundResult.installments[1].installment) }}元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult==null && commercialResult!=null}}">￥{{ tools.round(commercialResult.installments[0].installment - commercialResult.installments[1].installment) }}元</text>
+                    <text class="page-calculator-tab-bd-half-money" wx:if="{{accumulationFundResult!=null && commercialResult!=null}}">￥{{ tools.round(accumulationFundResult.installments[0].installment + commercialResult.installments[0].installment - accumulationFundResult.installments[1].installment - commercialResult.installments[1].installment) }}元</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+
+        </view>
+    </view>
+</view>
+
+<view class="page-calculator-radiogroup">
+    <view class="page-calculator-radiogroup-hd {{radioActive==0?'page-calculator-radiogroup-hd-on':''}}" data-index="0" bindtap="onSetRadioActive">
+        <view class="page-calculator-radiogroup-ico"><view></view></view>公积金贷款
+    </view>
+    <view class="page-calculator-radiogroup-hd {{radioActive==1?'page-calculator-radiogroup-hd-on':''}}" data-index="1" bindtap="onSetRadioActive">
+        <view class="page-calculator-radiogroup-ico"><view></view></view>商业贷款
+    </view>
+    <view class="page-calculator-radiogroup-hd {{radioActive==2?'page-calculator-radiogroup-hd-on':''}}" data-index="2" bindtap="onSetRadioActive">
+        <view class="page-calculator-radiogroup-ico"><view></view></view>组合贷款
+    </view>
+</view>
+
+<view class="page-calculator-form" wx:if="{{radioActive==0}}">
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">房屋售价</text>
+        <input class="page-calculator-form-input" placeholder="请输入金额" value="{{totalAmount}}" type="number" bindblur="onHousePrice" />
+        <text class="page-calculator-form-unit">万</text>
+    </view>
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">首付比例</text>
+        <view class="page-calculator-form-picker">
+            <picker value="{{downpayRatioIndex}}" range="{{downpayRatioArray}}" bindchange="onDownpayRatio">
+                <view>{{downpayRatioArray[downpayRatioIndex]}}</view>
+            </picker>
+        </view>
+        <image src="../../image/right_grey.png" class="page-calculator-form-picker-arrow"></image>
+    </view>
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">贷款总额</text>
+        <input class="page-calculator-form-input" placeholder="请输入金额" value="{{loanAmount}}" type="number" bindblur="onLoanAmount"/>
+        <text class="page-calculator-form-unit">万</text>
+    </view>
+
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">贷款年限</text>
+        <view class="page-calculator-form-picker">
+            <picker value="{{yearIndex}}" range="{{yearArray}}" bindchange="onYearPicker">
+                <view>{{yearArray[yearIndex]}}年</view>
+            </picker>
+        </view>
+        <image src="../../image/right_grey.png" class="page-calculator-form-picker-arrow"></image>
+    </view>
+
+    <view class="page-calculator-form-line page-calculator-form-line1" bindtap="onAccumulationFundPickerOpen">
+        <text class="page-calculator-form-tit">公积金利率</text>
+        <view class="page-calculator-form-picker">
+            <text class="page-calculator-form-picker-txt">{{multipleStrs[accumulationFundMultipleIndex]}}</text>{{accumulationFundInterestRate}}%
+        </view>
+    </view>
+</view>
+
+<view class="page-calculator-form" wx:if="{{radioActive==1}}">
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">房屋售价</text>
+        <input class="page-calculator-form-input" placeholder="请输入金额" value="{{totalAmount}}" type="number" bindblur="onHousePrice" />
+        <text class="page-calculator-form-unit">万</text>
+    </view>
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">首付比例</text>
+        <view class="page-calculator-form-picker">
+            <picker value="{{downpayRatioIndex}}" range="{{downpayRatioArray}}" bindchange="onDownpayRatio"><view>{{downpayRatioArray[downpayRatioIndex]}}</view></picker>
+        </view>
+        <image src="../../image/right_grey.png" class="page-calculator-form-picker-arrow"></image>
+    </view>
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">贷款总额</text>
+        <input class="page-calculator-form-input" placeholder="请输入金额" value="{{loanAmount}}" type="number" bindblur="onLoanAmount"/>
+        <text class="page-calculator-form-unit">万</text>
+    </view>
+
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">贷款年限</text>
+        <view class="page-calculator-form-picker">
+            <picker value="{{yearIndex}}" range="{{yearArray}}" bindchange="onYearPicker">
+                <view>{{yearArray[yearIndex]}}年</view>
+            </picker>
+        </view>
+        <image src="../../image/right_grey.png" class="page-calculator-form-picker-arrow"></image>
+    </view>
+
+    <view class="page-calculator-form-line page-calculator-form-line1" bindtap="onCommercialPickerOpen">
+        <text class="page-calculator-form-tit">商贷利率</text>
+        <view class="page-calculator-form-picker">
+            <text class="page-calculator-form-picker-txt">{{multipleStrs[commercialMultipleIndex]}}</text>{{commercialInterestRate}}%
+        </view>
+    </view>
+</view>
+
+<view class="page-calculator-form" wx:if="{{radioActive==2}}">
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">房屋售价</text>
+        <input class="page-calculator-form-input" placeholder="请输入金额" value="{{totalAmount}}" type="number" bindblur="onHousePrice" />
+        <text class="page-calculator-form-unit">万</text>
+    </view>
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">首付比例</text>
+        <view class="page-calculator-form-picker">
+            <picker value="{{downpayRatioIndex}}" range="{{downpayRatioArray}}" bindchange="onDownpayRatio"><view>{{downpayRatioArray[downpayRatioIndex]}}</view></picker>
+        </view>
+        <image src="../../image/right_grey.png" class="page-calculator-form-picker-arrow"></image>
+    </view>
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">贷款总额</text>
+        <input class="page-calculator-form-input" placeholder="请输入金额" value="{{loanAmount}}" type="number" bindblur="onLoanAmount"/>
+        <text class="page-calculator-form-unit">万</text>
+    </view>
+
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">贷款年限</text>
+        <view class="page-calculator-form-picker">
+            <picker value="{{yearIndex}}" range="{{yearArray}}" bindchange="onYearPicker">
+                <view>{{yearArray[yearIndex]}}年</view>
+            </picker>
+        </view>
+        <image src="../../image/right_grey.png" class="page-calculator-form-picker-arrow"></image>
+    </view>
+
+    <view class="page-calculator-form-line page-calculator-form-line1" bindtap="onAccumulationFundPickerOpen">
+        <text class="page-calculator-form-tit">公积金利率</text>
+        <view class="page-calculator-form-picker">
+            <text class="page-calculator-form-picker-txt">{{multipleStrs[accumulationFundMultipleIndex]}}</text>{{accumulationFundInterestRate}}%
+        </view>
+    </view>
+
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">公积金贷款总额</text>
+        <input class="page-calculator-form-input" placeholder="请输入金额" value="{{accumulationFundLoanAmount}}" type="number" bindblur="onAccumulationFundLoanAmount"/>
+        <text class="page-calculator-form-unit">万</text>
+    </view>
+
+    <view class="page-calculator-form-line page-calculator-form-line1" bindtap="onCommercialPickerOpen">
+        <text class="page-calculator-form-tit">商贷利率</text>
+        <view class="page-calculator-form-picker">
+            <text class="page-calculator-form-picker-txt">{{multipleStrs[commercialMultipleIndex]}}</text>{{commercialInterestRate}}%
+        </view>
+    </view>
+
+    <view class="page-calculator-form-line">
+        <text class="page-calculator-form-tit">商贷总额</text>
+        <input class="page-calculator-form-input" placeholder="请输入金额" value="{{commercialLoanAmount}}" type="number" bindblur="onCommercialLoanAmount"/>
+        <text class="page-calculator-form-unit">万</text>
+    </view>
+</view>
+
+
+<button class="page-calculator-btn" type="primary" bindtap="onCalculate">计算</button>
+
+<view class="page-calculator-tip">此结果仅供参考，实际费用以当地缴费为准</view>
+
+<view class="page-calculator-over" wx:if="{{accumulationFundPickerActive}}">
+    <view class="page-calculator-over-con">
+        <view class="page-calculator-over-tit">公积金利率<button class="page-calculator-over-btn" bindtap="onAccumulationFundPickerClose">确定</button></view>
+        <block wx:if="businessRateif">
+            <view class="page-calculator-over-input"><text>自定义：</text><input value="{{accumulationFundInterestRate}}" bindblur="onAccumulationFundInterestRate" type="number"/><view>%</view></view>
+            <view class="page-calculator-over-list-tit">或选择公积金利率</view>
+        </block>
+        <view class="page-calculator-over-listhg">
+            <view class="page-calculator-over-list" wx:for="{{multipleStrs}}" wx:key="*this">
+                <view class="page-calculator-over-list-line {{accumulationFundMultipleIndex==index?'page-calculator-over-list-on':''}}" data-index="{{index}}" bindtap="onAccumulationFundPicker">{{item}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="page-calculator-over" wx:if="{{commercialPickerActive}}">
+    <view class="page-calculator-over-con">
+        <view class="page-calculator-over-tit">商贷利率<button class="page-calculator-over-btn" bindtap="onCommercialPickerClose">确定</button></view>
+        <block wx:if="businessRateif">
+            <view class="page-calculator-over-input"><text>自定义：</text><input value="{{commercialInterestRate}}" bindblur="onCommercialInterestRate" type="number"/><view>%</view></view>
+            <view class="page-calculator-over-list-tit">或选择商贷利率</view>
+        </block>
+        <view class="page-calculator-over-listhg">
+            <view class="page-calculator-over-list" wx:for="{{multipleStrs}}" wx:key="*this">
+                <view class="page-calculator-over-list-line {{commercialMultipleIndex==index?'page-calculator-over-list-on':''}}" data-index="{{index}}" bindtap="onCommercialPicker">{{item}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+

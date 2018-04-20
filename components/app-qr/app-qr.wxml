@@ -1,0 +1,6 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-modal-mask" style="opacity:{{opacity}};"></view>
+<view class="app-qr" bindtap="onClose">
+    <view class="app-qr-content" style="opacity:{{opacity * 2}};" catchtap="onCatchTap"><image src="{{url}}"></image></view>
+</view>

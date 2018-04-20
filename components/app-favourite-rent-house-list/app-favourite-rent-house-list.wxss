@@ -1,0 +1,1 @@
+@import "../app-rent-house-list/app-rent-house-list.wxss";.app-favourite-rent-house-list-del{width:24px;height:24px;position:absolute;bottom:10px;right:10px}

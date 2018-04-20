@@ -1,0 +1,30 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<scroll-view class="page-chat-win" style="height: {{height}}px;" scroll-y scroll-into-view="{{maxId}}">
+    <block wx:for="{{msgs}}" wx:key="userMessageUid">
+        <view wx:if="{{item.msgType=='text' || item.msgType=='image'}}" class="page-chat-win-from">
+            <image class="page-chat-win-from-img" src="{{item.headImageUrl==null?'../../image/head.png':item.headImageUrl}}" />
+            <view class="page-chat-win-from-content" wx:if="{{item.msgType=='text'}}">{{item.content}}</view>
+            <view style="padding:0;display:flex;" class="page-chat-win-from-content" wx:else><image style="{{img[index].width==null?'width:1px;height:1px;':'width:'+img[index].width+'px;height:'+img[index].height+'px;'}}" lazy-load="true" src="{{item.picUrl}}" bindload="onImageLoad" data-index="{{index}}" data-url="{{item.picUrl}}" bindtap="onImageTap"/></view>
+            <view class="page-chat-win-left"></view>
+        </view>
+        <view wx:if="{{item.msgType=='reply-text' || item.msgType=='reply-image'}}" class="page-chat-win-to">
+            <image class="page-chat-win-to-img" src="{{item.headImageUrl==null?'../../image/head.png':item.headImageUrl}}" />
+            <view class="page-chat-win-to-content" wx:if="{{item.msgType=='reply-text'}}">{{item.content}}</view>
+            <view style="padding:0;display:flex;" class="page-chat-win-to-content" wx:else><image style="{{img[index].width==null?'width:1px;height:1px;':'width:'+img[index].width+'px;height:'+img[index].height+'px;'}}" lazy-load="true" src="{{tools.getPicUrl(item.picUrl, null)}}" bindload="onImageLoad" data-index="{{index}}" data-url="{{tools.getPicUrl(item.picUrl, null)}}" bindtap="onImageTap"/></view>
+            <view class="page-chat-win-right"></view>
+        </view>
+    </block>
+    <view style="width:100;height:1px;" id="maxId"></view>
+</scroll-view>
+<view class="page-chat-win-bottom">
+    <input class="page-chat-win-bottom-input" style="{{focus?'border-bottom:1px solid rgb(102,202,76);':'border-bottom:1px solid rgb(216,216,216);'}}"
+           bindfocus="onFocus" bindinput="onInput" bindblur="onBlur" value="{{content}}"/>
+
+    <block wx:if="{{content==null || content.length==0}}">
+        <image class="page-chat-win-plus" src="../../image/plus.png" bindtap="onChoose" />
+    </block>
+    <block wx:else>
+        <button style="padding:0px 5px;line-height:34px;" type="primary" size="mini" class="page-chat-win-send-btn" bindtap="onSend">发送</button>
+    </block>
+</view>

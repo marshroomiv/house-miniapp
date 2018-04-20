@@ -1,0 +1,3 @@
+<template name="appVideo">
+    <app-video value="{{value}}"></app-video>
+</template>

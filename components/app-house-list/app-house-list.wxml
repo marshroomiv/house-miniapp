@@ -1,0 +1,27 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-house-list" wx:if="{{value.houseObjects!=null}}">
+    <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_appmsg" wx:for="{{ value.houseObjects }}" wx:key="houseUid" data-houseuid="{{item.houseUid}}" bindtap="onItemTap">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                    <image class="weui-media-box__thumb" src="{{ tools.getPicUrl(item.houseCoverPicturePath,'_200_0') }}" lazy-load="true" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title">{{ item.houseTitle }}</view>
+                    <view class="weui-media-box__desc" style="position:relative;">
+                        <view class="app-house-list-block">{{ tools.getCommunityAndBlock1(item.communityUid, value.communityObjects, value.blocks) }}</view>
+                        <view class="app-house-list-price">{{ tools.getPriceInteger(item.price) }}{{ tools.getPriceDecimal(item.price) }}万</view>
+                    </view>
+                    <view class="weui-media-box__desc" style="position:relative;">
+                        <view>{{ item.chamberQuantity }}室{{ item.hallQuantity }}厅 {{ tools.getPriceInteger(item.area) }}{{ tools.getPriceDecimal(item.area) }}m<em>2</em></view>
+                        <view class="app-house-list-unit-price">{{ tools.getPriceInteger(item.unitPrice) }}元/m<em>2</em></view>
+                    </view>
+                    <block wx:if="{{ item.houseFeatureObjectList!=null && item.houseFeatureObjectList.length>0 && value.features!=null && value.features.length>0}}">
+                        <app-features value="{{ {features:tools.getFeatures(item.houseFeatureObjectList, value.features)} }}"></app-features>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

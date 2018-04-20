@@ -1,0 +1,28 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="app-quick-icon">
+    <view class="app-quick-icon-item" bindtap="onBuy">
+        <view class="app-quick-icon-item-circle" style="background:rgb(1,201,129);">
+            <image src="../../image/buy.png" style="width:36px;height:36px;" class="app-quick-icon-item-img"></image>
+        </view>
+        <view class="app-quick-icon-item-label">买房</view>
+    </view>
+    <view class="app-quick-icon-item" bindtap="onRent">
+        <view class="app-quick-icon-item-circle" style="background:rgb(255,175,29);">
+            <image src="../../image/rent.png" style="width:34px;height:34px;" class="app-quick-icon-item-img"></image>
+        </view>
+        <view class="app-quick-icon-item-label">租房</view>
+    </view>
+    <view class="app-quick-icon-item" bindtap="onAppointment">
+        <view class="app-quick-icon-item-circle" style="background:rgb(59,186,250);">
+            <image src="../../image/ask.png" style="width:28px;height:28px;" class="app-quick-icon-item-img"></image>
+        </view>
+        <view class="app-quick-icon-item-label">预约</view>
+    </view>
+    <view class="app-quick-icon-item" bindtap="onFavourite">
+        <view class="app-quick-icon-item-circle" style="background:rgb(255,133,82);">
+            <image src="../../image/favorite.png" style="width:30px;height:30px;" class="app-quick-icon-item-img"></image>
+        </view>
+        <view class="app-quick-icon-item-label">收藏</view>
+    </view>
+</view>

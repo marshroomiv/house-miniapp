@@ -1,0 +1,11 @@
+<app-tab value="{{ appTab_0 }}" bindcomponentevent="onComponentEvent"></app-tab>
+
+<view class="weui-tab__panel">
+    <block wx:if="{{activeIndex==0}}">
+        <app-favourite-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjectsFilter} }}"></app-favourite-house-list>
+    </block>
+    <block wx:else>
+        <app-favourite-rent-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjectsFilter} }}"></app-favourite-rent-house-list>
+    </block>
+</view>
+

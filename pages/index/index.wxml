@@ -1,0 +1,26 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<import src="../../wxParse/wxParse.wxml"/>
+
+
+<app-swiper value="{{ appSwiper_0 }}"></app-swiper>
+
+<app-quick-icon></app-quick-icon>
+
+<app-news></app-news>
+
+<app-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjects} }}"></app-house-list>
+
+<view class="page-index-more">
+    <button type="primary" style="height:38px;line-height:38px;width:168px;" bindtap="onMoreBuy">更多二手房</button>
+    <button type="primary" style="height:38px;line-height:38px;width:168px;" plain="true" bindtap="onMoreRent">更多租房</button>
+</view>
+
+<view class="page-bottom-info">
+    <text class="page-bottom-info-txt" wx:if="{{domain!=null && domain.technicalSupportName!=null}}">由{{domain.technicalSupportName}}提供技术支持 {{version}}</text>
+    <text class="page-bottom-info-txt" wx:else>由上海找物信息科技提供技术支持 {{version}}</text>
+    <text class="page-bottom-info-txt" bindtap="onCall">点击查看维护热线</text>
+</view>
+
+<app-contact-icon></app-contact-icon>
+

@@ -1,0 +1,17 @@
+<view class="app-contact-icon">
+    <image src="../../image/msg.png"></image>
+    <text>客服</text>
+    <contact-button
+            size="27"
+            session-from="weapp"
+            class="app-contact-chat"
+    >
+    </contact-button>
+    <contact-button
+            size="27"
+            session-from="weapp"
+            class="app-contact-chat"
+            style="left: 30px"
+    >
+    </contact-button>
+</view>

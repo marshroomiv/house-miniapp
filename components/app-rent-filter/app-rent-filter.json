@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "app-drop-down-a": "../app-drop-down-a/app-drop-down-a",
+    "app-drop-down-b": "../app-drop-down-b/app-drop-down-b",
+    "app-drop-down-c": "../app-drop-down-c/app-drop-down-c"
+  }
+}

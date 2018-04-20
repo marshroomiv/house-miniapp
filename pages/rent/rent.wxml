@@ -1,0 +1,25 @@
+<wxs src="../../common/tools.wxs" module="tools" />
+
+<view class="page-rent-header">
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="输入小区名" value="{{searchVal}}" bindinput="onSearchInput" />
+                <view class="weui-icon-clear" wx:if="{{searchVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{searchVal==null || searchVal.length==0}}" bindtap="onSearch">搜索</view>
+    </view>
+
+    <app-rent-menu-a bindcomponentevent="onMenuEvent"></app-rent-menu-a>
+</view>
+
+
+<view class="page-rent">
+
+    <app-rent-house-list value="{{ {blocks:blocks, features:features, communityObjects:communityObjects, houseObjects: houseObjects} }}"></app-rent-house-list>
+
+</view>
