@@ -12,3 +12,8 @@
 ![Image text](http://saas1.zhaowu.cc/files/cnXxVXYfRDaJalfCTjYlSw/image/material/2018-04-20/WkEsCDtfQsyb89AnkDPInSQ.jpg)
 ![Image text](http://saas1.zhaowu.cc/files/cnXxVXYfRDaJalfCTjYlSw/image/material/2018-04-20/fzXUI2NWSLmjQK8KOH6mLA.jpg)
 ![Image text](http://saas1.zhaowu.cc/files/cnXxVXYfRDaJalfCTjYlSw/image/material/2018-04-20/9CXFKLmOdTZag8XEsBiiY5Q.jpg)
+
+
+上海找物信息科技有限公司 
+办公地点: 上海市普陀区武宁路350号联合大厦2617室  
+联系电话: 15001716658
